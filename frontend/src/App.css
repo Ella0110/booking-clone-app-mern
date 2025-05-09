@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+    --color-bookingblue: #003b95;
+    --color-bookingtext: rgb(0, 108, 228);
+    --color-bookingtexthover: rgb(29 81 160);
+}
+@utility container {
+    padding-inline: 10px;
+    margin-inline: auto;
+
+    @variant sm {
+        padding-inline: 20px;
+    }
+
+    @variant lg {
+        padding-inline: 80px;
+    }
+
+    @variant xl {
+        padding-inline: 100px;
+    }
+}
+
+/* #root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+} */
