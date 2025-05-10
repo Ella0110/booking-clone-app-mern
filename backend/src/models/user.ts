@@ -1,6 +1,6 @@
-// src/models/user.ts
 import mongoose, { Document, Model } from "mongoose";
 import bcrypt from "bcryptjs";
+const validator = require("validator");
 
 //--------------------------------------------------
 // 1. 基本字段（纯数据结构）
@@ -27,21 +27,24 @@ const userSchema = new mongoose.Schema<IUserDoc>(
     {
         email: {
             type: String,
-            required: true,
+            required: [true, "Please tell us your email!"],
             unique: true,
+            lowercase: true,
+            validate: [validator.isEmail, "Please provide a valid email"],
         },
         password: {
             type: String,
-            required: true,
             select: false, // 默认查询不返回密码
+            required: [true, "Please tell us your password"],
+            minlength: 8,
         },
         firstname: {
             type: String,
-            required: true,
+            required: [true, "Please tell us your firstname!"],
         },
         lastname: {
             type: String,
-            required: true,
+            required: [true, "Please tell us your lastname!"],
         },
         // passwordChangedAt: Date,
         // passwordResetToken: String,
@@ -59,12 +62,13 @@ userSchema.pre<IUserDoc>("save", async function (next) {
     next();
 });
 
-// userSchema.methods.correctPassword = async function (
-//     candidate: string,
-//     stored: string
-// ) {
-//     return bcrypt.compare(candidate, stored);
-// };
+userSchema.methods.correctPassword = async function (
+    candidate: string, // candidate is the unbcrypt password from user input
+    stored: string // store is the bcrypt password from database
+) {
+    console.log(bcrypt.compare(candidate, stored));
+    return bcrypt.compare(candidate, stored);
+};
 
 // userSchema.methods.changedPasswordAfter = function (JWTTimestamp: number) {
 //     if (this.passwordChangedAt) {
