@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import User, { IUserDoc } from "../models/user";
 import jwt, { SignOptions, Secret } from "jsonwebtoken";
 import catchAsync from "../utils/catchAsync";
+import AppError from "../utils/appError";
 
 //--------------------------------------------------
 // 类型辅助
@@ -42,13 +43,14 @@ const createSendToken = (user: IUserDoc, statusCode: number, res: Response) => {
     res.status(statusCode).json({
         status: "success",
         token,
-        data: { user },
+        data: { userObj },
     });
 };
 
 //--------------------------------------------------
 // 路由处理函数
 //--------------------------------------------------
+// /api/user/register POST
 export const register = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const newUser = await User.create({
@@ -61,5 +63,26 @@ export const register = catchAsync(
         });
 
         createSendToken(newUser, 201, res);
+    }
+);
+
+export const login = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        // 先查 email 和 password 是否在 req.body 中
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return next(
+                new AppError("Please provide email and password.", 400)
+            );
+        }
+        // 查询用户是否存在于数据库，密码是否正确
+        const user = await User.findOne({ email }).select("+password");
+        console.log(user);
+        console.log("password", password);
+        if (!user || !(await user.correctPassword(password, user.password))) {
+            return next(new AppError("Incorrect email or password.", 401));
+        }
+        // 如果都没什么问题，发送 token
+        createSendToken(user, 200, res);
     }
 );
