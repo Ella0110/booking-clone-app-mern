@@ -1,0 +1,142 @@
+import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import * as apiClient from "../api-client";
+import { useAppContext } from "../contexts/AppContext";
+
+export type RegisterFormData = {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+};
+
+const Register = () => {
+    const { showToast } = useAppContext();
+    const {
+        register, // 写 validate，验证内容
+        watch, // 查看统一表单其他行的输入内容
+        handleSubmit, // 提交时验证表单
+        formState: { errors }, // 展示报错到表单
+    } = useForm<RegisterFormData>();
+
+    const mutation = useMutation(apiClient.register, {
+        onSuccess: () => {
+            showToast({ message: "Registration Success!", type: "SUCCESS" });
+            console.log("Registration is successful");
+        },
+        onError: (error: Error) => {
+            showToast({ message: error.message, type: "ERROR" });
+        },
+    });
+
+    const onSubmit = handleSubmit((data) => {
+        mutation.mutate(data);
+        console.log(data);
+    });
+    return (
+        <form
+            className="flex container w-3/5 lg:w-2/5 flex-col gap-5 pt-20"
+            onSubmit={onSubmit}
+        >
+            <h2 className="text-4xl font-extrabold">Create an Account</h2>
+            <div className="flex flex-col md:flex-row  gap-5">
+                <label className="text-gray-700 text-sm font-bold flex-1">
+                    First Name
+                    <input
+                        className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
+                        {...register("firstname", {
+                            required: "This field is required",
+                        })}
+                    ></input>
+                    {/* 点击 submit 后如果有报错会显示在表单 */}
+                    {errors.firstname && (
+                        <span className="text-red-500 font-normal">
+                            {errors.firstname.message}
+                        </span>
+                    )}
+                </label>
+                <label className="text-gray-700 text-sm font-bold flex-1">
+                    Last Name
+                    <input
+                        className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
+                        {...register("lastname", {
+                            required: "This field is required",
+                        })}
+                    ></input>
+                    {errors.lastname && (
+                        <span className="text-red-500 font-normal">
+                            {errors.lastname.message}
+                        </span>
+                    )}
+                </label>
+            </div>
+            <label className="text-gray-700 text-sm font-bold flex-1">
+                Email
+                <input
+                    type="email"
+                    className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
+                    {...register("email", {
+                        required: "This field is required",
+                    })}
+                ></input>
+                {errors.email && (
+                    <span className="text-red-500 font-normal">
+                        {errors.email.message}
+                    </span>
+                )}
+            </label>
+            <label className="text-gray-700 text-sm font-bold flex-1">
+                Password
+                <input
+                    type="password"
+                    className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
+                    {...register("password", {
+                        required: "This field is required",
+                        minLength: {
+                            value: 8, // 密码最短长度
+                            message: "Password must be at least 8 characters.", // 返回信息
+                        },
+                    })}
+                ></input>
+                {errors.password && (
+                    <span className="text-red-500 font-normal">
+                        {errors.password.message}
+                    </span>
+                )}
+            </label>
+            <label className="text-gray-700 text-sm font-bold flex-1">
+                ConfirmPassword
+                <input
+                    type="password"
+                    className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
+                    {...register("confirmPassword", {
+                        validate: (val) => {
+                            if (!val) {
+                                return "This field is required";
+                                // 使用 watch 来获取 password form 中的数据，进行对比
+                            } else if (watch("password") != val) {
+                                return "Your password do not match";
+                            }
+                        },
+                    })}
+                ></input>
+                {errors.confirmPassword && (
+                    <span className="text-red-500 font-normal">
+                        {errors.confirmPassword.message}
+                    </span>
+                )}
+            </label>
+            <span>
+                <button
+                    type="submit"
+                    className="bg-bookingtexthover text-white p-2 font-bold hover:bg-bookingblue text-xl"
+                >
+                    Create Account
+                </button>
+            </span>
+        </form>
+    );
+};
+
+export default Register;
