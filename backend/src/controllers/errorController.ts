@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import AppError from "../utils/appError";
 
 /** 扩展 Express 默认 Error，补充我们常用的属性 */
-interface ExtendedError extends Error {
+export interface ExtendedError extends Error {
     statusCode?: number;
     status?: "fail" | "error";
     isOperational?: boolean;

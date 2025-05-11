@@ -54,16 +54,23 @@ const createSendToken = (user: IUserDoc, statusCode: number, res: Response) => {
 export const register = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         console.log(req.body);
-        const newUser = await User.create({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            password: req.body.password,
-            // passwordConfirm: req.body.passwordConfirm,
-            // role: req.body.role,
-        });
-
-        createSendToken(newUser, 201, res);
+        // let newUser;
+        try {
+            const newUser = await User.create({
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                email: req.body.email,
+                password: req.body.password,
+                // passwordConfirm: req.body.passwordConfirm,
+                // role: req.body.role,
+            });
+            createSendToken(newUser, 201, res);
+        } catch (error) {
+            if ((error as any).code === 11000) {
+                const message = `User already exists, Please use another email to register`;
+                throw new AppError(message, 400);
+            }
+        }
     }
 );
 
