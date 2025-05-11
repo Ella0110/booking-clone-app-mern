@@ -13,6 +13,7 @@ console.log("API_BASE_URL", API_BASE_URL);
 export const register = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/user/register`, {
         method: "POST",
+        credentials: "include", // 告诉浏览器设置 cookies
         headers: {
             "Content-Type": "application/json",
         },
