@@ -53,6 +53,7 @@ const createSendToken = (user: IUserDoc, statusCode: number, res: Response) => {
 // /api/user/register POST
 export const register = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
+        console.log(req.body);
         const newUser = await User.create({
             firstname: req.body.firstname,
             lastname: req.body.lastname,

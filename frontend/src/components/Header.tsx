@@ -22,13 +22,13 @@ const Header = () => {
                     </Link>
                     <Link
                         to="/register"
-                        className="flex items-center text-bookingtext px-3 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                        className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
                     >
                         Register
                     </Link>
                     <Link
                         to="/signin"
-                        className="flex items-center text-bookingtext px-3 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                        className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
                     >
                         Sign In
                     </Link>
