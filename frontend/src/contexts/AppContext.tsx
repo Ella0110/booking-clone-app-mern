@@ -1,0 +1,45 @@
+import React, { useContext, useState } from "react";
+import Toast from "../components/Toast";
+
+type ToastMessage = {
+    message: string;
+    type: "SUCCESS" | "ERROR";
+};
+
+type AppContext = {
+    showToast: (toastMessage: ToastMessage) => void;
+};
+
+const AppContext = React.createContext<AppContext | undefined>(undefined);
+
+export const AppContextProvider = ({
+    children,
+}: {
+    children: React.ReactNode;
+}) => {
+    const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
+    return (
+        <AppContext.Provider
+            value={{
+                showToast: (toastMessage) => {
+                    setToast(toastMessage);
+                },
+            }}
+        >
+            {/* 每次时间结束，会调用 setToast 设置为 undefined，重新 render 后 toast 为 undefined，不会再进入这个 Toast 组件 */}
+            {toast && (
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(undefined)}
+                />
+            )}
+            {children}
+        </AppContext.Provider>
+    );
+};
+
+export const useAppContext = () => {
+    const context = useContext(AppContext);
+    return context as AppContext;
+};
