@@ -12,15 +12,18 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
         const timer = setTimeout(() => {
             onClose();
         }, 5000);
-
-        return clearTimeout(timer); // 在这个组件关闭或重新打开时会重置新 timer
+        console.log("before", timer);
+        return () => {
+            clearTimeout(timer);
+            console.log("after", timer);
+        }; // 在这个组件关闭或重新打开时会重置新 timer
     }, [onClose]); // [onClose] 意味着这个 hook 只在 首次渲染组件以及当 onClose 函数更改时生效
 
     // TailwindCSS 的条件判断
     const styles =
         type === "SUCCESS"
-            ? "fixed top-4 right-4 z-50 p-4 rounded-md bg-green-600 text-white max-x-md"
-            : "fixed top-4 right-4 z-50 p-4 rounded-md bg-red-600 text-white max-x-md";
+            ? "fixed top-24 right-4 z-50 p-4 rounded-md bg-green-600 text-white max-x-md"
+            : "fixed top-24 right-4 z-50 p-4 rounded-md bg-red-600 text-white max-x-md";
     return (
         <div className={styles}>
             <div className="flex justify-center items-center">
