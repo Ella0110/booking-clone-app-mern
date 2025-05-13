@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { useAppContext } from "../contexts/AppContext";
+import SignOutButton from "./SignOutButton";
 
 const Header = () => {
     const { isLoggedIn } = useAppContext();
@@ -13,7 +14,7 @@ const Header = () => {
                 <span className="flex space-x-2">
                     <Link
                         to="/currency"
-                        className="flex items-center text-white px-3 text-base font-bold rounded-sm hover:bg-bookingtexthover"
+                        className="flex items-center text-white px-3 text-base font-bold rounded-sm hover:bg-bookingtexthover cursor-pointer"
                     >
                         NZD
                     </Link>
@@ -31,9 +32,7 @@ const Header = () => {
                             >
                                 My Booking
                             </Link>
-                            <button className="hidden sm:block flex items-center self-center text-bookingtext px-2 ml-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100">
-                                Sign Out
-                            </button>
+                            <SignOutButton />
                         </>
                     ) : (
                         <>
