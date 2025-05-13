@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import * as apiClient from "../api-client";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router";
 import { useAppContext } from "../contexts/AppContext";
 
@@ -11,6 +11,7 @@ export type SignInFormData = {
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const { showToast } = useAppContext();
     const {
         register, // 对表单输入信息进行数据验证
@@ -19,14 +20,13 @@ const SignIn = () => {
     } = useForm<SignInFormData>();
 
     const mutation = useMutation(apiClient.signin, {
-        onSuccess: () => {
+        onSuccess: async () => {
             showToast({ message: "Registration Success!", type: "SUCCESS" });
             navigate("/");
-            console.log("Login success");
+            await queryClient.invalidateQueries("validateToken");
         },
         onError: (error: Error) => {
             showToast({ message: error.message, type: "ERROR" });
-            console.log(error.message);
         },
     });
     const onSubmit = handleSubmit((data) => {
