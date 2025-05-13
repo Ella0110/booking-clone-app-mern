@@ -6,6 +6,7 @@
  */
 
 import type { RegisterFormData } from "./pages/Register";
+import type { SignInFormData } from "./pages/Signin";
 
 //前端导入 env 数据的方式
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -26,6 +27,25 @@ export const register = async (formData: RegisterFormData) => {
     if (!response.ok) {
         throw new Error(responseBody.message);
     }
+};
+
+export const signin = async (formData: SignInFormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/user/signin`, {
+        method: "POST",
+        credentials: "include", // 告诉浏览器设置 cookies
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    });
+    console.log(response);
+
+    const responseBody = await response.json();
+
+    if (!response.ok) {
+        throw new Error(responseBody.message);
+    }
+    return responseBody;
 };
 
 export const validateToken = async () => {

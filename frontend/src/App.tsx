@@ -3,6 +3,7 @@ import "./App.css";
 import Layout from "./layout/layout";
 import Register from "./pages/Register";
 import Header from "./components/Header";
+import SignIn from "./pages/Signin";
 
 const App = () => {
     return (
@@ -30,6 +31,15 @@ const App = () => {
                         <>
                             <Header />
                             <Register />
+                        </>
+                    }
+                />
+                <Route
+                    path="/signin"
+                    element={
+                        <>
+                            <Header />
+                            <SignIn />
                         </>
                     }
                 />

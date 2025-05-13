@@ -74,7 +74,7 @@ export const register = catchAsync(
     }
 );
 
-export const login = catchAsync(
+export const signin = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         // 先查 email 和 password 是否在 req.body 中
         const { email, password } = req.body;

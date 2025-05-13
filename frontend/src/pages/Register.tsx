@@ -38,7 +38,7 @@ const Register = () => {
     });
     return (
         <form
-            className="flex container w-3/5 lg:w-2/5 flex-col gap-5 pt-20"
+            className="flex flex-col gap-5 container w-3/5 lg:w-2/5 pt-20"
             onSubmit={onSubmit}
         >
             <h2 className="text-4xl font-extrabold">Create an Account</h2>
@@ -132,7 +132,7 @@ const Register = () => {
             <span>
                 <button
                     type="submit"
-                    className="bg-bookingtexthover text-white p-2 font-bold hover:bg-bookingblue text-xl"
+                    className="bg-bookingtexthover text-white p-2 font-bold hover:bg-bookingblue text-xl rounded-md"
                 >
                     Create Account
                 </button>
