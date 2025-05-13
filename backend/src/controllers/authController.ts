@@ -94,3 +94,9 @@ export const login = catchAsync(
         createSendToken(user, 200, res);
     }
 );
+
+export const validateToken = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        res.status(200).send({ userId: req.id });
+    }
+);

@@ -3,9 +3,10 @@ import cors from "cors";
 import "dotenv/config";
 import userRoute from "./routes/userRoute";
 import globalErrorHandler from "./controllers/errorController";
+import cookieParser from "cookie-parser";
 
 const app = express();
-
+app.use(cookieParser());
 // 自动将 API 请求的 body 转换为 json
 app.use(express.json());
 // 解析 Content-Type: application/x-www-form-urlencoded的请求，将其转换为 object，可以通过 req.body 获取

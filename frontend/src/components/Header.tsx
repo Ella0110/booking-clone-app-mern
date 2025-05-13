@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import { useAppContext } from "../contexts/AppContext";
 
 const Header = () => {
+    const { isLoggedIn } = useAppContext();
+    console.log("isLoggedIn", isLoggedIn);
     return (
         <div className="bg-bookingblue py-6">
             <div className="container mx-auto flex justify-between">
@@ -20,18 +23,34 @@ const Header = () => {
                     >
                         文/A
                     </Link>
-                    <Link
-                        to="/register"
-                        className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
-                    >
-                        Register
-                    </Link>
-                    <Link
-                        to="/signin"
-                        className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
-                    >
-                        Sign In
-                    </Link>
+                    {isLoggedIn ? (
+                        <>
+                            <Link
+                                to="/my-bookings"
+                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                            >
+                                My Booking
+                            </Link>
+                            <button className="hidden sm:block flex items-center self-center text-bookingtext px-2 ml-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100">
+                                Sign Out
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                to="/register"
+                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                            >
+                                Register
+                            </Link>
+                            <Link
+                                to="/signin"
+                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 ml-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                            >
+                                Sign In
+                            </Link>
+                        </>
+                    )}
                 </span>
             </div>
         </div>
