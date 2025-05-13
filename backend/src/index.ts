@@ -7,7 +7,10 @@ const DB = (process.env.MONGO_CONNECTION_STRING as string).replace(
     process.env.DATABASE_PASSWORD as string
 );
 mongoose.connect(DB).then(() => {
-    console.log("DB connection successful");
+    console.log(
+        "DB connection successful: ",
+        process.env.MONGO_CONNECTION_STRING
+    );
 });
 
 const PORT = process.env.PORT || 3001;

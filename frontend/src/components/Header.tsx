@@ -14,13 +14,13 @@ const Header = () => {
                 <span className="flex space-x-2">
                     <Link
                         to="/currency"
-                        className="flex items-center text-white px-3 text-base font-bold rounded-sm hover:bg-bookingtexthover cursor-pointer"
+                        className="flex items-center text-white px-3 text-base font-bold rounded-full hover:bg-bookingtexthover cursor-pointer"
                     >
                         NZD
                     </Link>
                     <Link
                         to="/translate"
-                        className="flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover"
+                        className="flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
                     >
                         文/A
                     </Link>
@@ -28,7 +28,7 @@ const Header = () => {
                         <>
                             <Link
                                 to="/my-bookings"
-                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                                className="hidden sm:block flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
                             >
                                 My Booking
                             </Link>
@@ -38,13 +38,13 @@ const Header = () => {
                         <>
                             <Link
                                 to="/register"
-                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100 cursor-pointer"
                             >
                                 Register
                             </Link>
                             <Link
                                 to="/signin"
-                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 ml-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100"
+                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 ml-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100 cursor-pointer"
                             >
                                 Sign In
                             </Link>
