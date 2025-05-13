@@ -100,3 +100,12 @@ export const validateToken = catchAsync(
         res.status(200).send({ userId: req.id });
     }
 );
+
+export const logout = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        res.cookie("jwt", "", {
+            expires: new Date(0),
+        });
+        res.send();
+    }
+);

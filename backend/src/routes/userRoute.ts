@@ -1,10 +1,15 @@
 import express from "express";
-import { register, signin, validateToken } from "../controllers/authController";
+import {
+    logout,
+    register,
+    signin,
+    validateToken,
+} from "../controllers/authController";
 import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 router.post("/register", register);
 router.post("/signin", signin);
 router.get("/validate-token", verifyToken, validateToken);
-
+router.post("/logout", logout);
 export default router;
