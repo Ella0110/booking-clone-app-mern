@@ -1,6 +1,13 @@
 import "dotenv/config";
 import mongoose from "mongoose";
 import app from "./app";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+    cloud_name: process.env.PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.PUBLIC_CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const DB = (process.env.MONGO_CONNECTION_STRING as string).replace(
     "<PASSWORD>",
