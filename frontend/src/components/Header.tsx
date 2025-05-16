@@ -28,9 +28,15 @@ const Header = () => {
                         <>
                             <Link
                                 to="/my-bookings"
-                                className="hidden sm:block flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
+                                className="hidden sm:flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
                             >
                                 My Booking
+                            </Link>
+                            <Link
+                                to="/add-hotel"
+                                className="hidden sm:flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
+                            >
+                                My Hotel
                             </Link>
                             <SignOutButton />
                         </>
@@ -38,13 +44,13 @@ const Header = () => {
                         <>
                             <Link
                                 to="/register"
-                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100 cursor-pointer"
+                                className="hidden sm:flex items-center self-center text-bookingtext px-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100 cursor-pointer"
                             >
                                 Register
                             </Link>
                             <Link
                                 to="/signin"
-                                className="hidden sm:block flex items-center self-center text-bookingtext px-2 ml-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100 cursor-pointer"
+                                className="hidden sm:flex  items-center self-center text-bookingtext px-2 ml-2 py-1 text-sm font-medium rounded-sm bg-white hover:bg-gray-100 cursor-pointer"
                             >
                                 Sign In
                             </Link>
