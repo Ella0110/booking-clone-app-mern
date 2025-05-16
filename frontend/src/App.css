@@ -4,6 +4,7 @@
     --color-bookingblue: #003b95;
     --color-bookingtext: rgb(0, 108, 228);
     --color-bookingtexthover: rgb(29 81 160);
+    --color-bookingformbackground: #f5f5f5;
 }
 @utility container {
     padding-inline: 10px;
