@@ -4,6 +4,7 @@ import "dotenv/config";
 import userRoute from "./routes/userRoute";
 import globalErrorHandler from "./controllers/errorController";
 import cookieParser from "cookie-parser";
+import myHotelRoute from "./routes/myHotelRoute";
 
 const app = express();
 app.use(cookieParser());
@@ -22,6 +23,7 @@ app.use(
 
 // API
 app.use("/api/user", userRoute);
+app.use("/api/my-hotels", myHotelRoute);
 
 app.use(globalErrorHandler);
 
