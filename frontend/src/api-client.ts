@@ -7,6 +7,7 @@
 
 import type { RegisterFormData } from "./pages/Register";
 import type { SignInFormData } from "./pages/SignIn";
+import type { HotelType } from "../../backend/src/shared/type";
 
 //前端导入 env 数据的方式
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
@@ -78,4 +79,15 @@ export const addMyHotel = async (hotelFormData: FormData) => {
         throw new Error("Failed to add hotel"); // 如果报这个错说明后端出问题，不是前端
     }
     return response.json(); // 留着给以后用
+};
+
+export const fetchMyHotels = async (): Promise<HotelType[]> => {
+    // 指定返回的类型
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+        credentials: "include",
+    });
+    if (!response.ok) {
+        throw new Error("Failed to fetch hotels"); // 如果报这个错说明后端出问题，不是前端
+    }
+    return response.json();
 };
