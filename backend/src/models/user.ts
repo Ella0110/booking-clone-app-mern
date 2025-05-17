@@ -66,7 +66,6 @@ userSchema.methods.correctPassword = async function (
     candidate: string, // candidate is the unbcrypt password from user input
     stored: string // store is the bcrypt password from database
 ) {
-    console.log(bcrypt.compare(candidate, stored));
     return bcrypt.compare(candidate, stored);
 };
 

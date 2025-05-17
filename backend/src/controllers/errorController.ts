@@ -45,6 +45,7 @@ const sendErrorDev = (err: ExtendedError, res: Response): void => {
         message: err.message,
         stack: err.stack,
     });
+    console.log("sending error from dev errorController");
 };
 
 const sendErrorProd = (err: ExtendedError, res: Response): void => {

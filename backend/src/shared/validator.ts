@@ -1,5 +1,6 @@
 import { body, check, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
+import catchAsync from "../utils/catchAsync";
 
 type ValidationResultError = {
     [string: string]: [string];
@@ -30,26 +31,30 @@ export const registerValidate = [
     }),
 ];
 
-export const validate = (req: Request, res: Response, next: NextFunction) => {
-    const errors = validationResult(req);
+export const validate = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const errors = validationResult(req);
+        console.log(errors);
+        if (!errors.isEmpty()) {
+            // Group errors by field name
+            const validationErrors: ValidationResultError = {};
 
-    if (!errors.isEmpty()) {
-        // Group errors by field name
-        const validationErrors: ValidationResultError = {};
+            errors.array().forEach((error) => {
+                if (error.type === "field") {
+                    // error is FieldValidationError
+                    validationErrors[error.path] = error.msg;
+                }
+            });
 
-        errors.array().forEach((error) => {
-            if (error.type === "field") {
-                // error is FieldValidationError
-                validationErrors[error.path] = error.msg;
-            }
-        });
+            res.status(400).json({
+                success: false,
+                message: "Validation failed",
+                errors: validationErrors,
+            });
+            console.log("sending 400 from validate");
+            return;
+        }
 
-        res.status(400).json({
-            success: false,
-            message: "Validation failed",
-            errors: validationErrors,
-        });
+        next();
     }
-
-    next();
-};
+);

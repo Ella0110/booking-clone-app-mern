@@ -53,7 +53,6 @@ const createSendToken = (user: IUserDoc, statusCode: number, res: Response) => {
 // /api/user/register POST
 export const register = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        console.log(req.body);
         // let newUser;
         try {
             const newUser = await User.create({
@@ -85,8 +84,6 @@ export const signin = catchAsync(
         }
         // 查询用户是否存在于数据库，密码是否正确
         const user = await User.findOne({ email }).select("+password");
-        console.log(user);
-        console.log("password", password);
         if (!user || !(await user.correctPassword(password, user.password))) {
             return next(new AppError("Incorrect email or password.", 401));
         }
