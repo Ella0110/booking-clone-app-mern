@@ -23,8 +23,8 @@ export const hotelValidate = [
 ];
 
 export const registerValidate = [
-    check("firstName", "First Name is required").isString(),
-    check("lastName", "Last Name is required").isString(),
+    check("firstname", "First Name is required").isString(),
+    check("lastname", "Last Name is required").isString(),
     check("email", "Email is required").isEmail(),
     check("password", "Password with 6 or more characters required").isLength({
         min: 8,
