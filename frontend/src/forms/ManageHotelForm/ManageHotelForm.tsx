@@ -18,13 +18,43 @@ export type HotelFormData = {
     starRating: number; // 酒店评分
     imageFiles: FileList; // 酒店图片
 };
-const ManageHotelForm = () => {
+
+type Props = {
+    onSave: (hotelFormData: FormData) => void;
+    isLoading: boolean;
+};
+const ManageHotelForm = ({ onSave, isLoading }: Props) => {
     const formMethods = useForm<HotelFormData>();
     const { handleSubmit } = formMethods;
 
-    const onSubmit = handleSubmit((formData: HotelFormData) => {
-        console.log(formData);
-        // create a new FormData Object & call our API
+    const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
+        // FormData 它能把键值对（包括 string、Blob/File）打包成 multipart/form-data 编码，通常用来发送带文件的 HTTP 请求。
+        const formData = new FormData();
+        formData.append("name", formDataJson.name);
+        formData.append("city", formDataJson.city);
+        formData.append("country", formDataJson.country);
+        formData.append("description", formDataJson.description);
+        formData.append("type", formDataJson.type);
+        formData.append("pricePerNight", formDataJson.pricePerNight.toString());
+        formData.append("starRating", formDataJson.starRating.toString());
+        formData.append("adultCount", formDataJson.adultCount.toString());
+        formData.append("childCount", formDataJson.childCount.toString());
+
+        formDataJson.facilities.forEach((facility, index) => {
+            formData.append(`facilities[${index}]`, facility);
+        });
+
+        // if (formDataJson.imageUrls) {
+        //     formDataJson.imageUrls.forEach((url, index) => {
+        //         formData.append(`imageUrls[${index}]`, url);
+        //     });
+        // }
+
+        Array.from(formDataJson.imageFiles).forEach((imageFile) => {
+            formData.append(`imageFiles`, imageFile);
+        });
+
+        onSave(formData);
     });
     return (
         <FormProvider {...formMethods}>
@@ -42,10 +72,11 @@ const ManageHotelForm = () => {
                 <ImagesSection />
                 <span className="flex justify-end">
                     <button
+                        disabled={isLoading} // isLoading 的作用：当用户点击 save 提交表单时，让 save 按钮不能使用
                         type="submit"
-                        className="bg-bookingtext text-xl text-white font-bold px-3 py-1 rounded hover:bg-bookingtexthover"
+                        className="bg-bookingtext text-xl text-white font-bold px-3 py-1 rounded hover:bg-bookingtexthover disabled:bg-gray-500"
                     >
-                        Save
+                        {isLoading ? "Saving..." : "Save"}
                     </button>
                 </span>
             </form>

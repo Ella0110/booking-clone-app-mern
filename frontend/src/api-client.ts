@@ -9,8 +9,8 @@ import type { RegisterFormData } from "./pages/Register";
 import type { SignInFormData } from "./pages/SignIn";
 
 //前端导入 env 数据的方式
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-console.log("API_BASE_URL", API_BASE_URL);
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
 export const register = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/user/register`, {
         method: "POST",
@@ -20,7 +20,7 @@ export const register = async (formData: RegisterFormData) => {
         },
         body: JSON.stringify(formData),
     });
-    console.log(response);
+
     // 返回错误
     const responseBody = await response.json();
 
@@ -38,7 +38,6 @@ export const signin = async (formData: SignInFormData) => {
         },
         body: JSON.stringify(formData),
     });
-    console.log(response);
 
     const responseBody = await response.json();
 
@@ -67,4 +66,16 @@ export const signout = async () => {
     if (!response.ok) {
         throw new Error("Error during sign out");
     }
+};
+
+export const addMyHotel = async (hotelFormData: FormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+        method: "POST",
+        credentials: "include", // 告诉浏览器设置 cookies
+        body: hotelFormData,
+    });
+    if (!response.ok) {
+        throw new Error("Failed to add hotel"); // 如果报这个错说明后端出问题，不是前端
+    }
+    return response.json(); // 留着给以后用
 };
