@@ -12,10 +12,8 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
         const timer = setTimeout(() => {
             onClose();
         }, 5000);
-        console.log("before", timer);
         return () => {
             clearTimeout(timer);
-            console.log("after", timer);
         }; // 在这个组件关闭或重新打开时会重置新 timer
     }, [onClose]); // [onClose] 意味着这个 hook 只在 首次渲染组件以及当 onClose 函数更改时生效
 
