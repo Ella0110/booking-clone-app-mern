@@ -32,7 +32,7 @@ const Header = () => {
                                 My Booking
                             </Link>
                             <Link
-                                to="/add-hotel"
+                                to="/my-hotels"
                                 className="hidden sm:flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
                             >
                                 My Hotel

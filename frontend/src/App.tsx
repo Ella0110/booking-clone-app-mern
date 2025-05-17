@@ -7,6 +7,7 @@ import { Navigate } from "react-router";
 import AddHotel from "./pages/AddHotel";
 import SignIn from "./pages/SignIn";
 import { useAppContext } from "./contexts/AppContext";
+import MyHotels from "./pages/MyHotels";
 
 const App = () => {
     const { isLoggedIn } = useAppContext();
@@ -54,6 +55,18 @@ const App = () => {
                             element={
                                 <Layout>
                                     <AddHotel />
+                                </Layout>
+                            }
+                        />
+                    </>
+                )}
+                {isLoggedIn && (
+                    <>
+                        <Route
+                            path="/my-hotels"
+                            element={
+                                <Layout>
+                                    <MyHotels />
                                 </Layout>
                             }
                         />

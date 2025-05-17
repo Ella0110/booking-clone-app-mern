@@ -74,7 +74,7 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
                     <button
                         disabled={isLoading} // isLoading 的作用：当用户点击 save 提交表单时，让 save 按钮不能使用
                         type="submit"
-                        className="bg-bookingtext text-xl text-white font-bold px-3 py-1 rounded hover:bg-bookingtexthover disabled:bg-gray-500"
+                        className="bg-bookingbutton text-xl text-white font-bold px-3 py-1 rounded hover:bg-bookingbuttonhover disabled:bg-gray-400"
                     >
                         {isLoading ? "Saving..." : "Save"}
                     </button>
