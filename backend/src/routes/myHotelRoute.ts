@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { createMyHotel } from "../controllers/hotelController";
+import { createMyHotel, getMyHotel } from "../controllers/hotelController";
 import verifyToken from "../middleware/auth";
 import { hotelValidate, validate } from "../shared/validator";
 
@@ -20,6 +20,12 @@ router.post(
     hotelValidate, // express-validator 数据验证
     validate, // 获取上一步的报错信息，报 error
     createMyHotel
+);
+
+router.get(
+    "/",
+    verifyToken, // 验证登录，获取 userId
+    getMyHotel
 );
 
 export default router;

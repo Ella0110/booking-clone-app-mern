@@ -42,3 +42,12 @@ export const createMyHotel = catchAsync(
         res.status(201).json({ data: hotel });
     }
 );
+
+export const getMyHotel = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const hotels = await Hotel.find({ userId: req.userId });
+
+        // SEND RESPONSE
+        res.status(200).json(hotels);
+    }
+);
