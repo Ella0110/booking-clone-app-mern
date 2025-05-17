@@ -9,9 +9,10 @@ import myHotelRoute from "./routes/myHotelRoute";
 const app = express();
 app.use(cookieParser());
 // 自动将 API 请求的 body 转换为 json
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 // 解析 Content-Type: application/x-www-form-urlencoded的请求，将其转换为 object，可以通过 req.body 获取
 app.use(express.urlencoded({ extended: true }));
+
 // 允许在网络上的任何位置访问所有路由
 app.use(
     cors({
@@ -20,7 +21,6 @@ app.use(
         credentials: true,
     })
 );
-
 // API
 app.use("/api/user", userRoute);
 app.use("/api/my-hotels", myHotelRoute);
