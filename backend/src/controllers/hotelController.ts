@@ -51,3 +51,18 @@ export const getMyHotel = catchAsync(
         res.status(200).json(hotels);
     }
 );
+
+export const getMyHotelById = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const hotel = await Hotel.findOne({
+            // 为什么 find 是返回 array，单 findOne 返回 object
+            _id: req.params.id.toString(),
+            userId: req.userId,
+        });
+
+        if (!hotel) {
+            return next(new AppError("No hotel found with that id", 404));
+        }
+        res.status(200).json(hotel);
+    }
+);
