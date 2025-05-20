@@ -5,7 +5,7 @@ import {
     getMyHotel,
     getMyHotelById,
     updateMyHotelById,
-} from "../controllers/hotelController";
+} from "../controllers/myHotelController";
 import verifyToken from "../middleware/auth";
 import { hotelValidate, validate } from "../shared/validator";
 
