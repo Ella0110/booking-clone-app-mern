@@ -19,10 +19,11 @@ export type HotelFormData = {
     pricePerNight: number; // 每晚的价格
     starRating: number; // 酒店评分
     imageFiles: FileList; // 酒店图片
+    imageUrls: string[];
 };
 
 type Props = {
-    hotel: HotelType;
+    hotel?: HotelType;
     onSave: (hotelFormData: FormData) => void;
     isLoading: boolean;
 };
