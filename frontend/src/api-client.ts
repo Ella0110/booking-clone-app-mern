@@ -91,3 +91,15 @@ export const fetchMyHotels = async (): Promise<HotelType[]> => {
     }
     return response.json();
 };
+
+export const fetchMyHotelById = async (
+    hotelId: string
+): Promise<HotelType[]> => {
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+        credentials: "include",
+    });
+    if (!response.ok) {
+        throw new Error("Failed to fetch hotel by id"); // 如果报这个错说明后端出问题，不是前端
+    }
+    return response.json();
+};

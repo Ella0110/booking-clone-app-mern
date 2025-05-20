@@ -4,6 +4,8 @@ import TypeSction from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
+import type { HotelType } from "../../../../backend/src/shared/type";
+import { useEffect } from "react";
 
 export type HotelFormData = {
     name: string;
@@ -20,12 +22,18 @@ export type HotelFormData = {
 };
 
 type Props = {
+    hotel: HotelType;
     onSave: (hotelFormData: FormData) => void;
     isLoading: boolean;
 };
-const ManageHotelForm = ({ onSave, isLoading }: Props) => {
+const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     const formMethods = useForm<HotelFormData>();
-    const { handleSubmit } = formMethods;
+    const { handleSubmit, reset } = formMethods;
+
+    useEffect(() => {
+        // 当 hotel 数据变了就 reset 页面
+        reset(hotel);
+    }, [hotel, reset]);
 
     const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
         // FormData 它能把键值对（包括 string、Blob/File）打包成 multipart/form-data 编码，通常用来发送带文件的 HTTP 请求。
