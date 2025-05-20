@@ -27,9 +27,8 @@ export const createMyHotel = catchAsync(
         }
 
         // 1. upload the image to cloudinary
-
-        // 2. if upload was successiful, add the url to the new hotel
         const imageUrls = await uploadImages(imageFiles);
+        // 2. if upload was successiful, add the url to the new hotel
         newHotel.imageUrls = imageUrls;
         newHotel.lastUpdated = new Date();
         newHotel.userId = req.userId;
@@ -64,5 +63,36 @@ export const getMyHotelById = catchAsync(
             return next(new AppError("No hotel found with that id", 404));
         }
         res.status(200).json(hotel);
+    }
+);
+
+export const updateMyHotelById = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const updateHotel: HotelType = req.body;
+        updateHotel.lastUpdated = new Date();
+        // console.log(updateHotel);
+        // console.log("params", req.params);
+        const hotel = await Hotel.findOneAndUpdate(
+            {
+                _id: req.params.id,
+                userId: req.userId,
+            },
+            updateHotel,
+            { new: true }
+        );
+        if (!hotel) {
+            return next(
+                new AppError("No hotel found with that id, can not update", 404)
+            );
+        }
+        const files = req.files as Express.Multer.File[];
+        const updatedImageUrls = await uploadImages(files);
+        hotel.imageUrls = [
+            ...updatedImageUrls,
+            ...(updateHotel.imageUrls || []), // 防止用户删除所有现有 url
+        ];
+
+        await hotel.save();
+        res.status(201).json(hotel);
     }
 );
