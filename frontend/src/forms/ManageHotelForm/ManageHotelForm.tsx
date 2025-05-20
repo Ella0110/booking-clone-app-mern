@@ -39,6 +39,9 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
         // FormData 它能把键值对（包括 string、Blob/File）打包成 multipart/form-data 编码，通常用来发送带文件的 HTTP 请求。
         const formData = new FormData();
+        if (hotel) {
+            formData.append("hotelId", hotel._id);
+        }
         formData.append("name", formDataJson.name);
         formData.append("city", formDataJson.city);
         formData.append("country", formDataJson.country);
@@ -53,15 +56,17 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
             formData.append(`facilities[${index}]`, facility);
         });
 
-        // if (formDataJson.imageUrls) {
-        //     formDataJson.imageUrls.forEach((url, index) => {
-        //         formData.append(`imageUrls[${index}]`, url);
-        //     });
-        // }
+        if (formDataJson.imageUrls) {
+            formDataJson.imageUrls.forEach((url, index) => {
+                formData.append(`imageUrls[${index}]`, url);
+            });
+        }
 
-        Array.from(formDataJson.imageFiles).forEach((imageFile) => {
-            formData.append(`imageFiles`, imageFile);
-        });
+        if (formDataJson.imageFiles) {
+            Array.from(formDataJson.imageFiles).forEach((imageFile) => {
+                formData.append(`imageFiles`, imageFile);
+            });
+        }
 
         onSave(formData);
     });
