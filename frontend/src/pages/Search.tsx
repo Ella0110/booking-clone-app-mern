@@ -36,7 +36,7 @@ const Search = () => {
             <div className="flex flex-col gap-5">
                 <div className="flex justify-between items-center ">
                     <span className="text-xl font-bold">
-                        {hotelData?.pagination.total} Hotels found
+                        {hotelData?.pagination.total || 0} Hotels found
                         {search.destination ? ` in ${search.destination}` : ""}
                     </span>
                     <div>List/grid</div>
