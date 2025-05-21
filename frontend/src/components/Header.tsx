@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "./SignOutButton";
+import { GrSearch } from "react-icons/gr";
 
 const Header = () => {
     const { isLoggedIn } = useAppContext();
@@ -11,6 +12,12 @@ const Header = () => {
                     <Link to="/">BookingClone.com</Link>
                 </span>
                 <span className="flex space-x-2">
+                    <Link
+                        to="/search"
+                        className="flex items-center rounded-full hover:bg-bookingtexthover cursor-pointer px-2 py-1"
+                    >
+                        <GrSearch size={20} className=" text-white  " />
+                    </Link>
                     <Link
                         to="/currency"
                         className="flex items-center text-white px-3 text-base font-bold rounded-full hover:bg-bookingtexthover cursor-pointer"
