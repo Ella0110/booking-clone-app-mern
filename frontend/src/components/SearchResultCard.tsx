@@ -18,7 +18,7 @@ const SearchResultCard = ({ hotel }: Props) => {
             {/* Hotel Detail */}
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between ">
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                         <Link
                             to={`/detail/${hotel._id}`}
                             className="text-2xl font-bold tracking-wide text-bookingtext"
@@ -26,7 +26,7 @@ const SearchResultCard = ({ hotel }: Props) => {
                             {hotel.name}
                         </Link>
                         <div className="flex items-center">
-                            <span className="flex">
+                            <span className="flex items-center">
                                 {Array.from({ length: hotel.starRating }).map(
                                     () => (
                                         <AiFillStar className="text-amber-400" />

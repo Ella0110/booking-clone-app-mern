@@ -10,7 +10,7 @@ const Pagination = ({ page, pages, onPageChange }: Props) => {
     }
     console.log(pageNumbers);
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
             <ul className="flex border border-slate-300 ">
                 {pageNumbers.map((number) => (
                     <li
