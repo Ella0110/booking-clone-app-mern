@@ -36,9 +36,9 @@ const SearchBar = () => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="-mt-6 p-1 bg-orange-300 rounded shadow-md  flex flex-row item-center gap-1"
+            className="-mt-6 p-1 bg-orange-300 rounded shadow-md  flex flex-col md:flex-row item-center gap-1"
         >
-            <div className="flex flex-row w-1/5 items-center flex-1 rounded bg-white p-2">
+            <div className="flex flex-row w-full md:w-1/4 items-center flex-1 rounded bg-white p-2">
                 <MdTravelExplore size={25} className="text-gray-700 mr-2" />
                 <input
                     placeholder="Where are you going?"
@@ -47,7 +47,7 @@ const SearchBar = () => {
                     onChange={(event) => setDestination(event.target.value)}
                 />
             </div>
-            <div className="flex items-center justify-between w-3/10 bg-white px-2 rounded gap-2">
+            <div className="flex items-center  w-full md:w-1/4 bg-white px-2 rounded">
                 <VscAccount size={25} className="text-gray-700 mr-2" />
                 <label className="flex item-center ">
                     <div className="flex items-center">Adults: </div>
@@ -76,7 +76,7 @@ const SearchBar = () => {
                     />
                 </label>
             </div>
-            <div className="flex flex-row w-1/5 items-center justify-between bg-white px-2 rounded gap-2">
+            <div className="flex flex-row w-full md:w-1/5 items-center  bg-white px-2 rounded">
                 <VscCalendar
                     size={25}
                     className="text-gray-700 mr-2 shrink-0"
@@ -94,7 +94,7 @@ const SearchBar = () => {
                     wrapperClassName="flex-1"
                 />
             </div>
-            <div className="flex flex-row w-1/5 items-center justify-between bg-white px-2 rounded gap-2">
+            <div className="flex flex-row w-full md:w-1/5 items-center  bg-white px-2 rounded ">
                 <VscCalendar
                     size={25}
                     className="text-gray-700 mr-2 shrink-0"
@@ -112,7 +112,7 @@ const SearchBar = () => {
                     wrapperClassName="w-4/5"
                 />
             </div>
-            <div className="flex rounded gap-1 w-1/10">
+            <div className="flex rounded gap-1 w-full md:w-1/10">
                 <button className=" w-full bg-bookingbutton rounded text-white h-full p-2 font-medium text-xl hover:bg-bookingbuttonhover">
                     Search
                 </button>
