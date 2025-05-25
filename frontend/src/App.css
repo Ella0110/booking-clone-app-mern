@@ -8,6 +8,7 @@
     --color-bookingbutton: #006de4;
     --color-bookingbuttonhover: #0157b8;
     --color-bookingreviewiconbg: #003c96;
+    --color-bookingsymbol: #004cb9;
 }
 @utility container {
     padding-inline: 20px;
