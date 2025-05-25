@@ -12,6 +12,7 @@ import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
 import LayoutSearch from "./layout/LayoutSearch";
 import LayoutComm from "./layout/LayoutComm";
+import Detail from "./pages/Detail";
 
 const App = () => {
     const { isLoggedIn } = useAppContext();
@@ -24,6 +25,14 @@ const App = () => {
                         <Layout>
                             <p>Home Page</p>
                         </Layout>
+                    }
+                />
+                <Route
+                    path="/detail/:hotelId"
+                    element={
+                        <LayoutSearch>
+                            <Detail />
+                        </LayoutSearch>
                     }
                 />
                 <Route
