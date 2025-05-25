@@ -107,3 +107,17 @@ export const getAllHotels = catchAsync(
         res.status(200).json(response);
     }
 );
+
+export const getHotelById = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const id = req.params.id.toString();
+
+        const hotel = await Hotel.findById(id);
+
+        if (!hotel) {
+            return next(new AppError("Can not find hotel by this id.", 404));
+        }
+
+        res.status(200).json(hotel);
+    }
+);
