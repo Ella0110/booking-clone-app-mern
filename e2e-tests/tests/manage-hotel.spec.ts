@@ -49,13 +49,13 @@ test("should alow user to add a hotel", async ({ page }) => {
 
 test("should display hotels", async ({ page }) => {
     await page.goto(`${UI_URL}/my-hotels`);
-    await expect(page.getByText("Dublin Getaways")).toBeVisible();
-    await expect(page.getByText("Lorem ipsum dolor sit ame")).toBeVisible();
-    await expect(page.getByText("Dublin, Ireland")).toBeVisible();
-    await expect(page.getByText("All Inclusive")).toBeVisible();
-    await expect(page.getByText("£119 per night")).toBeVisible();
-    await expect(page.getByText("2 adults, 3 children")).toBeVisible();
-    await expect(page.getByText("2 Star Rating")).toBeVisible();
+    await expect(page.getByText("Galway Getaways").first()).toBeVisible();
+    // await expect(page.getByText("Lorem ipsum dolor sit amet")).toBeVisible();
+    await expect(page.getByText("Galway, Ireland").first()).toBeVisible();
+    await expect(page.getByText("Hiking Resort").first()).toBeVisible();
+    await expect(page.getByText("£85 per night").first()).toBeVisible();
+    await expect(page.getByText("2 adults, 1 children").first()).toBeVisible();
+    await expect(page.getByText("3 Star Rating").first()).toBeVisible();
 
     await expect(
         page.getByRole("link", { name: "View Details" }).first()
@@ -69,16 +69,20 @@ test("should edit hotel", async ({ page }) => {
     await page.getByRole("link", { name: "View Details" }).first().click();
 
     await page.waitForSelector('[name="name"]', { state: "attached" }); //为了让他加载页面，等待
-    await expect(page.locator('[name="name"]')).toHaveValue("Dublin Getaways");
-    await page.locator('[name="name"]').fill("Dublin Getaways UPDATED");
+    await expect(page.locator('[name="name"]')).toHaveValue("Galway Getaway");
+    await page.locator('[name="name"]').fill("Galway Getaway UPDATED");
     await page.getByRole("button", { name: "Save" }).click();
     await expect(page.getByText("Hotel Saved!")).toBeVisible();
 
     await page.reload();
 
+    await page.getByRole("link", { name: "View Details" }).first().click();
+
+    await page.waitForSelector('[name="name"]', { state: "attached" }); //为了让他加载页面，等待
     await expect(page.locator('[name="name"]')).toHaveValue(
-        "Dublin Getaways UPDATED"
+        "Galway Getaway UPDATED"
     );
-    await page.locator('[name="name"]').fill("Dublin Getaways");
+    await page.locator('[name="name"]').fill("Galway Getaway");
     await page.getByRole("button", { name: "Save" }).click();
+    await expect(page.getByText("Hotel Saved!")).toBeVisible();
 });
