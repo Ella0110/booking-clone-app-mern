@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as apiClient from "../api-client";
 import { useMutation, useQueryClient } from "react-query";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useAppContext } from "../contexts/AppContext";
 
 export type SignInFormData = {
@@ -13,6 +13,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const { showToast } = useAppContext();
+    const location = useLocation();
     const {
         register, // 对表单输入信息进行数据验证
         handleSubmit, //提交时验证表单
@@ -22,7 +23,7 @@ const SignIn = () => {
     const mutation = useMutation(apiClient.signin, {
         onSuccess: async () => {
             showToast({ message: "Sign In Success!", type: "SUCCESS" });
-            navigate("/");
+            navigate(location.state?.from?.pathname || "/");
             await queryClient.invalidateQueries("validateToken");
         },
         onError: (error: Error) => {
