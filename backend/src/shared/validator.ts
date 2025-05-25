@@ -1,4 +1,4 @@
-import { body, check, validationResult } from "express-validator";
+import { body, check, param, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
 import catchAsync from "../utils/catchAsync";
 
@@ -29,6 +29,10 @@ export const registerValidate = [
     check("password", "Password with 6 or more characters required").isLength({
         min: 8,
     }),
+];
+
+export const getHotelByIdValidate = [
+    param("id").notEmpty().withMessage("Hotel ID is required"),
 ];
 
 export const validate = catchAsync(
