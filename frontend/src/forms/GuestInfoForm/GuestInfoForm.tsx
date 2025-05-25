@@ -4,7 +4,7 @@ import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-import { Link } from "react-router";
+// import { Link } from "react-router";
 
 type Props = {
     hotelId: string;
@@ -54,7 +54,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             data.adultCount,
             data.childCount
         );
-        navigate("/sign-in", { state: { from: location } });
+        navigate("/signin", { state: { from: location } });
     };
 
     const onSubmit = (data: GuestInfoFormData) => {
@@ -96,103 +96,112 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                             ? handleSubmit(onSubmit)
                             : handleSubmit(onSignInClick)
                     }
-                    className="rounded-lg border-gray-500 border-[1px]"
+                    className=""
                 >
-                    <div className="grid grid-cols-2 ">
-                        <div className="border-gray-500 border-r-[1px] p-3">
-                            <label className="text-sm font-bold text-gray-800">
-                                CHECK-IN
-                            </label>
+                    <div className="grid grid-cols-1 items-center gap-4">
+                        <div className="rounded-lg border-gray-400 border-[1px]">
+                            <div className="grid grid-cols-2 ">
+                                <div className=" border-gray-400 border-r-[1px] p-3 ml-6">
+                                    <label className="text-sm font-bold text-gray-800">
+                                        CHECK-IN
+                                    </label>
 
-                            <DatePicker
-                                required
-                                selected={checkIn}
-                                onChange={(date) =>
-                                    setValue("checkIn", date as Date)
-                                }
-                                selectsStart
-                                startDate={checkIn}
-                                endDate={checkOut}
-                                minDate={minDate}
-                                maxDate={maxDate}
-                                placeholderText="Check-in Date"
-                                className="min-w-full text-sm text-gray-600"
-                                wrapperClassName="min-w-full"
-                            />
+                                    <DatePicker
+                                        required
+                                        selected={checkIn}
+                                        onChange={(date) =>
+                                            setValue("checkIn", date as Date)
+                                        }
+                                        selectsStart
+                                        startDate={checkIn}
+                                        endDate={checkOut}
+                                        minDate={minDate}
+                                        maxDate={maxDate}
+                                        placeholderText="Check-in Date"
+                                        className="min-w-full text-sm text-gray-600 focus:outline-none"
+                                        wrapperClassName="min-w-full"
+                                    />
+                                </div>
+                                <div className="p-3 ml-6">
+                                    <label className="text-sm font-bold text-gray-800">
+                                        CHECK-OUT
+                                    </label>
+                                    <DatePicker
+                                        required
+                                        selected={checkOut}
+                                        onChange={(date) =>
+                                            setValue("checkOut", date as Date)
+                                        }
+                                        selectsStart
+                                        startDate={checkIn}
+                                        endDate={checkOut}
+                                        minDate={minDate}
+                                        maxDate={maxDate}
+                                        placeholderText="Check-in Date"
+                                        className="min-w-full text-sm text-gray-600 focus:outline-none"
+                                        wrapperClassName="min-w-full"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex flex-col border-gray-400 border-t-[1px]">
+                                <div className="flex item-center justify-between  p-3 gap-4 ml-6">
+                                    <label className="flex items-center text-sm font-bold text-gray-800">
+                                        ADULTS:
+                                    </label>
+                                    <input
+                                        className="w-full text-sm bg-transparent  hover:text-gray-500 max-w-12 focus:outline-none"
+                                        type="number"
+                                        min={1}
+                                        max={20}
+                                        {...register("adultCount", {
+                                            required: "This field is required",
+                                            min: {
+                                                value: 1,
+                                                message:
+                                                    "There must be at least one adult",
+                                            },
+                                            valueAsNumber: true,
+                                        })}
+                                    />
+                                    <label className="flex items-center  text-sm font-bold text-gray-800">
+                                        CHILDREN:
+                                    </label>
+                                    <input
+                                        className="w-full bg-transparent text-sm hover:text-gray-500 max-w-12 focus:outline-none"
+                                        type="number"
+                                        min={0}
+                                        max={20}
+                                        {...register("childCount", {
+                                            valueAsNumber: true,
+                                        })}
+                                    />
+                                </div>
+                                {errors.adultCount && (
+                                    <span className="px-3 ml-6 pb-1 text-red-500 font-semibold text-sm">
+                                        {errors.adultCount.message}
+                                    </span>
+                                )}
+                            </div>
                         </div>
-                        <div className="p-3">
-                            <label className="text-sm font-bold text-gray-800">
-                                CHECK-OUT
-                            </label>
-                            <DatePicker
-                                required
-                                selected={checkOut}
-                                onChange={(date) =>
-                                    setValue("checkOut", date as Date)
-                                }
-                                selectsStart
-                                startDate={checkIn}
-                                endDate={checkOut}
-                                minDate={minDate}
-                                maxDate={maxDate}
-                                placeholderText="Check-in Date"
-                                className="min-w-full text-sm text-gray-600"
-                                wrapperClassName="min-w-full"
-                            />
-                        </div>
-                    </div>
-                    <div className="flex item-center justify-between border-gray-700 border-t-[1px] p-3 gap-1">
-                        <label className="flex items-center text-sm font-bold text-gray-800">
-                            ADULTS:
-                        </label>
-                        <input
-                            className="w-full text-sm bg-transparent  hover:text-gray-500 max-w-12 focus:outline-none"
-                            type="number"
-                            min={1}
-                            max={20}
-                            {...register("adultCount", {
-                                required: "This field is required",
-                                min: {
-                                    value: 1,
-                                    message: "There must be at least one adult",
-                                },
-                                valueAsNumber: true,
-                            })}
-                        />
-                        <label className="flex items-center  text-sm font-bold text-gray-800">
-                            CHILDREN:
-                        </label>
-                        <input
-                            className="w-full bg-transparent text-sm hover:text-gray-500 max-w-12 focus:outline-none"
-                            type="number"
-                            min={0}
-                            max={20}
-                            {...register("childCount", {
-                                valueAsNumber: true,
-                            })}
-                        />
-                        {errors.adultCount && (
-                            <span className="text-red-500 font-semibold text-sm">
-                                {errors.adultCount.message}
-                            </span>
+
+                        {isLoggedIn ? (
+                            <button
+                                // to="/booking"
+                                className="flex items-center justify-center bg-bookingbutton rounded-lg text-white h-full p-2 font-bold hover:bg-bookingbuttonhover text-lg"
+                            >
+                                Book Now
+                            </button>
+                        ) : (
+                            <button
+                                // to="/signin"
+                                className="flex items-center justify-center bg-bookingbutton rounded-lg text-white h-full p-2 font-bold hover:bg-bookingbuttonhover text-lg"
+                            >
+                                Sign in to Book
+                            </button>
                         )}
                     </div>
                 </form>
-                {isLoggedIn ? (
-                    <Link
-                        to="/booking"
-                        className="flex items-center justify-center bg-bookingbutton rounded-lg text-white h-full p-2 font-bold hover:bg-bookingbuttonhover text-lg"
-                    >
-                        Book Now
-                    </Link>
-                ) : (
-                    <Link
-                        to="/signin"
-                        className="flex items-center justify-center bg-bookingbutton rounded-lg text-white h-full p-2 font-bold hover:bg-bookingbuttonhover text-lg"
-                    >
-                        Sign in to Book
-                    </Link>
-                )}
+
                 <div className="flex items-center justify-center text-sm text-gray-500">
                     You won&apos;t be charged yet
                 </div>
