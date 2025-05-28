@@ -10,10 +10,21 @@ import type { SignInFormData } from "./pages/SignIn";
 import type {
     HotelSearchResponse,
     HotelType,
+    UserType,
 } from "../../backend/src/shared/type";
 
 //前端导入 env 数据的方式
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
+export const fetchCurrentUser = async (): Promise<UserType> => {
+    const response = await fetch(`${API_BASE_URL}/api/user/me`, {
+        credentials: "include",
+    });
+    if (!response.ok) {
+        throw new Error("Error fetching user");
+    }
+    return response.json();
+};
 
 export const register = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/user/register`, {
