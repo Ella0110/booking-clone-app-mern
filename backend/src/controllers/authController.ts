@@ -106,3 +106,14 @@ export const logout = catchAsync(
         res.send();
     }
 );
+
+export const getMe = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const userId = req.userId;
+        const user = await User.findById(userId).select("-password");
+        if (!user) {
+            return next(new AppError("User not found", 400));
+        }
+        res.status(200).json(user);
+    }
+);
