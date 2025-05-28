@@ -15,6 +15,14 @@ export interface HotelType {
     lastUpdated: Date;
 }
 
+export type UserType = {
+    _id: string;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+};
+
 export type HotelSearchResponse = {
     data: HotelType[];
     pagination: {
@@ -22,4 +30,10 @@ export type HotelSearchResponse = {
         page: number;
         pages: number;
     };
+};
+
+export type PaymentIntentResponse = {
+    paymentIntentId: string;
+    clientSecret: string;
+    totalCost: number;
 };
