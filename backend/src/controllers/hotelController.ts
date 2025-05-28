@@ -95,7 +95,7 @@ export const getAllHotels = catchAsync(
         }
         console.log(!hotelsList.toString());
         console.log(hotelsList);
-        const totalItems = await Hotel.countDocuments(); // 酒店总量
+        const totalItems = await Hotel.countDocuments(query); // 酒店总量
         const response: HotelSearchResponse = {
             data: hotelsList,
             pagination: {
