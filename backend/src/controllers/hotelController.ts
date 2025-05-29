@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import catchAsync from "../utils/catchAsync";
 import Hotel from "../models/hotel";
-import { HotelSearchResponse } from "../shared/type";
+import { BookingType, HotelSearchResponse } from "../shared/type";
 import AppError from "../utils/appError";
 import Stripe from "stripe";
 
@@ -159,5 +159,54 @@ export const createPaymentIntent = catchAsync(
         };
 
         res.status(201).json(response);
+    }
+);
+
+export const createBooking = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const paymentIntentId = req.body.paymentIntentId;
+
+        const paymentIntent = await stripe.paymentIntents.retrieve(
+            paymentIntentId as string
+        );
+
+        if (!paymentIntent) {
+            return next(new AppError("payment intent not found", 400));
+        }
+
+        if (
+            paymentIntent.metadata.hotelId !== req.params.hotelId ||
+            paymentIntent.metadata.userId !== req.userId
+        ) {
+            return next(new AppError("payment intent mismatch", 400));
+        }
+
+        if (paymentIntent.status !== "succeeded") {
+            return next(
+                new AppError(
+                    `payment intent not succeeded. Status: ${paymentIntent.status}`,
+                    400
+                )
+            );
+        }
+
+        const newBooking: BookingType = {
+            ...req.body,
+            userId: req.userId,
+        };
+
+        const hotel = await Hotel.findOneAndUpdate(
+            { _id: req.params.hotelId },
+            {
+                $push: { bookings: newBooking },
+            }
+        );
+
+        if (!hotel) {
+            return next(new AppError("hotel not found", 400));
+        }
+
+        await hotel.save();
+        res.status(200).send();
     }
 );
