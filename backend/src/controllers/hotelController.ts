@@ -3,6 +3,9 @@ import catchAsync from "../utils/catchAsync";
 import Hotel from "../models/hotel";
 import { HotelSearchResponse } from "../shared/type";
 import AppError from "../utils/appError";
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 
 const constructSearchQuery = (queryParams: any) => {
     let constructedQuery: any = {};
@@ -119,5 +122,42 @@ export const getHotelById = catchAsync(
         }
 
         res.status(200).json(hotel);
+    }
+);
+
+export const createPaymentIntent = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { numberOfNights } = req.body;
+        const hotelId = req.params.hotelId;
+
+        // 查询数据库获取酒店数据
+        const hotel = await Hotel.findById(hotelId);
+        if (!hotel) {
+            return next(new AppError("Can not find hotel by this id.", 404));
+        }
+        const totalCost = hotel.pricePerNight * numberOfNights;
+
+        // 发给 Stripe
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: totalCost, // 总金额
+            currency: "cny", // 货币
+            metadata: {
+                hotelId,
+                userId: req.userId,
+            },
+        });
+
+        if (!paymentIntent.client_secret) {
+            return next(new AppError("Error creating paymentIntent", 500));
+        }
+
+        // 返回给前端的数据
+        const response = {
+            paymentIntentId: paymentIntent.id,
+            clientSecret: paymentIntent.client_secret,
+            totalCost,
+        };
+
+        res.status(201).json(response);
     }
 );
