@@ -13,6 +13,7 @@ export interface HotelType {
     starRating: number;
     imageUrls: string[];
     lastUpdated: Date;
+    bookings: BookingType[];
 }
 
 export type UserType = {
