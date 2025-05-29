@@ -4,6 +4,7 @@ import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import { differenceInCalendarDays } from "date-fns";
 // import { Link } from "react-router";
 
 type Props = {
@@ -41,6 +42,8 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
 
     const checkIn = watch("checkIn");
     const checkOut = watch("checkOut");
+    const stayDays =
+        checkIn && checkOut ? differenceInCalendarDays(checkOut, checkIn) : 0;
 
     const minDate = new Date();
     const maxDate = new Date();
@@ -73,7 +76,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <div className="flex flex-col gap-4 p-7 text-gray-800 bg-white shadow-lg">
                 <div className="flex justify-between">
                     <div className="flex gap-1 items-center">
-                        <div className="text-gray-500 font-medium text-lg line-through">
+                        <div className="text-red-400 font-medium text-lg line-through">
                             £{pricePerNight * 2}
                         </div>
                         <div className="text-gray-700 font-medium text-lg">
@@ -207,19 +210,21 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 </div>
                 <div className="grid grid-cols-2 gap-1 text-sm">
                     <div className="underline">
-                        CurrentPrice * stayDays nights
+                        {pricePerNight} * {stayDays} nights
                     </div>
-                    <div className="justify-self-end">184</div>
+                    <div className="justify-self-end">
+                        £{pricePerNight * stayDays}
+                    </div>
                     <div className="underline">Long stay discount</div>
-                    <div className="justify-self-end text-red-500">-$300</div>
+                    <div className="justify-self-end text-red-500">-£300</div>
                     <div className="underline">Cleaning fee</div>
-                    <div className="justify-self-end">$200</div>
+                    <div className="justify-self-end">£200</div>
                     <div className="underline">Service fee</div>
-                    <div className="justify-self-end">$0</div>
+                    <div className="justify-self-end">£0</div>
                 </div>
                 <div className="flex justify-between border-t-[1px] py-3 ">
                     <div>Total before taxes</div>
-                    <div>totalPrice</div>
+                    <div>£{pricePerNight * stayDays - 300 + 200}</div>
                 </div>
             </div>
         </div>
