@@ -13,6 +13,7 @@ import Search from "./pages/Search";
 import LayoutSearch from "./layout/LayoutSearch";
 import LayoutComm from "./layout/LayoutComm";
 import Detail from "./pages/Detail";
+import Booking from "./pages/Booking";
 
 const App = () => {
     const { isLoggedIn } = useAppContext();
@@ -63,6 +64,14 @@ const App = () => {
                 />
                 {isLoggedIn && (
                     <>
+                        <Route
+                            path="/hotel/:hotelId/booking"
+                            element={
+                                <LayoutComm>
+                                    <Booking />
+                                </LayoutComm>
+                            }
+                        />
                         <Route
                             path="/add-hotel"
                             element={
