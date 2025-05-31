@@ -20,15 +20,15 @@ export type UserType = {
     _id: string;
     email: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
 };
 
 export type BookingType = {
     _id: string;
     userId: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     email: string;
     adultCount: number;
     childCount: number;
