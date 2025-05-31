@@ -5,6 +5,7 @@ import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { differenceInCalendarDays } from "date-fns";
+import { useEffect } from "react";
 // import { Link } from "react-router";
 
 type Props = {
@@ -45,9 +46,19 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     const stayDays =
         checkIn && checkOut ? differenceInCalendarDays(checkOut, checkIn) : 0;
 
+    useEffect(() => {
+        if (checkOut <= checkIn) {
+            const newCheckOut = new Date(checkIn);
+            newCheckOut.setDate(newCheckOut.getDate() + 1);
+            setValue("checkOut", newCheckOut);
+        }
+    }, [checkIn, checkOut]);
+
     const minDate = new Date();
     const maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 1);
+    const minCheckOutDate = new Date(checkIn);
+    minCheckOutDate.setDate(minCheckOutDate.getDate() + 1);
 
     const onSignInClick = (data: GuestInfoFormData) => {
         search.saveSearchValues(
@@ -138,7 +149,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                                         selectsStart
                                         startDate={checkIn}
                                         endDate={checkOut}
-                                        minDate={minDate}
+                                        minDate={minCheckOutDate}
                                         maxDate={maxDate}
                                         placeholderText="Check-in Date"
                                         className="min-w-full text-sm text-gray-600 focus:outline-none"

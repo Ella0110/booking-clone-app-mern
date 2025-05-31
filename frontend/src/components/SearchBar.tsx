@@ -56,7 +56,7 @@ const SearchBar = () => {
     maxDate.setFullYear(maxDate.getFullYear() + 1); // 取最近一年的数据
     const minCheckOutDate = new Date(checkIn);
     minCheckOutDate.setDate(minCheckOutDate.getDate() + 1);
-    console.log("minCheckOutDate", minCheckOutDate);
+
     return (
         <form
             onSubmit={handleSubmit}
