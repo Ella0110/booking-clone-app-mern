@@ -14,6 +14,7 @@ import LayoutSearch from "./layout/LayoutSearch";
 import LayoutComm from "./layout/LayoutComm";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
+import Home from "./pages/Home";
 
 const App = () => {
     const { isLoggedIn } = useAppContext();
@@ -24,7 +25,7 @@ const App = () => {
                     path="/"
                     element={
                         <Layout>
-                            <p>Home Page</p>
+                            <Home />
                         </Layout>
                     }
                 />
