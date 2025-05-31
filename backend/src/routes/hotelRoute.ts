@@ -4,12 +4,14 @@ import {
     getHotelById,
     createPaymentIntent,
     createBooking,
+    getLatestHotels,
 } from "../controllers/hotelController";
 import { getHotelByIdValidate, validate } from "../shared/validator";
 import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 
+router.get("/", getLatestHotels);
 router.get("/search", getAllHotels);
 router.get("/:id", getHotelByIdValidate, validate, getHotelById);
 

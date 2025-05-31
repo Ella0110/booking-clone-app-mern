@@ -109,6 +109,16 @@ export const getAllHotels = catchAsync(
     }
 );
 
+export const getLatestHotels = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const hotels = await Hotel.find().sort("-lastUpdated");
+        if (!hotels) {
+            return next(new AppError("Can not find hotels", 404));
+        }
+        res.status(200).json(hotels);
+    }
+);
+
 export const getHotelById = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const id = req.params.id.toString();
