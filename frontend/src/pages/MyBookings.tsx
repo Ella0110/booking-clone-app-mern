@@ -12,53 +12,66 @@ const MyBookings = () => {
     }
 
     return (
-        <div className="space-y-5">
+        <div className="space-y-8">
             <h1 className="text-3xl font-bold">My Bookings</h1>
-            {hotels.map((hotel) => (
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] border border-slate-300 rounded-lg p-8 gap-5">
-                    <div className="lg:w-full lg:h-[250px]">
-                        <img
-                            src={hotel.imageUrls[0]}
-                            className="w-full h-full object-cover object-center"
-                        />
-                    </div>
-                    <div className="flex flex-col gap-4 overflow-y-auto max-h-[300px]">
-                        <div className="text-2xl font-bold">
-                            {hotel.name}
-                            <div className="text-xs font-normal">
-                                {hotel.city}, {hotel.country}
-                            </div>
+            <div className="flex flex-col gap-8">
+                {hotels.map((hotel) => (
+                    <div
+                        className="flex flex-col lg:flex-row items-center border border-bookingformbackground rounded-lg 
+                    shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_10px_rgba(0,0,0,0.4)] p-8 gap-8"
+                    >
+                        <div className="lg:w-[150px] lg:h-[150px]">
+                            <img
+                                src={hotel.imageUrls[0]}
+                                className="w-full h-full object-cover rounded-lg object-center"
+                            />
                         </div>
-                        {hotel.bookings.map((booking) => (
-                            <div>
-                                <div>
-                                    <span className="font-bold mr-2">
-                                        Dates:{" "}
-                                    </span>
-                                    <span>
-                                        {new Date(
-                                            booking.checkIn
-                                        ).toDateString()}{" "}
-                                        -
-                                        {new Date(
-                                            booking.checkOut
-                                        ).toDateString()}
-                                    </span>
-                                </div>
-                                <div>
-                                    <span className="font-bold mr-2">
-                                        Guests:
-                                    </span>
-                                    <span>
-                                        {booking.adultCount} adults,{" "}
-                                        {booking.childCount} children
-                                    </span>
+                        <div className="flex grow flex-col gap-4 overflow-y-auto max-h-[300px]">
+                            <div className="text-xl font-bold">
+                                {hotel.name}
+                                <div className="text-sm font-normal">
+                                    {hotel.city}, {hotel.country}
                                 </div>
                             </div>
-                        ))}
+                            {hotel.bookings.map((booking) => (
+                                <div
+                                    className="flex flex-col lg:flex-row justify-between items-start 
+                                 py-1 "
+                                >
+                                    <div>
+                                        <div>
+                                            <span className="font-bold mr-2">
+                                                Dates:{" "}
+                                            </span>
+                                            <span className="text-[15px]">
+                                                {new Date(
+                                                    booking.checkIn
+                                                ).toDateString()}{" "}
+                                                -
+                                                {new Date(
+                                                    booking.checkOut
+                                                ).toDateString()}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span className="font-bold mr-2">
+                                                Guests:
+                                            </span>
+                                            <span className="text-[15px]">
+                                                {booking.adultCount} adults,{" "}
+                                                {booking.childCount} children
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="text-xl text-slate-800 font-bold">
+                                        £{booking.totalCost}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };
