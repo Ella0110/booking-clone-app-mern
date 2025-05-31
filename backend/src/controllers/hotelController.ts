@@ -135,7 +135,7 @@ export const getHotelById = catchAsync(
 
 export const createPaymentIntent = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        console.log("🔥 enter createPaymentIntent handler");
+        // console.log("🔥 enter createPaymentIntent handler");
         const { numberOfNights } = req.body;
         const hotelId = req.params.hotelId;
 
@@ -174,6 +174,7 @@ export const createPaymentIntent = catchAsync(
 
 export const createBooking = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
+        // console.log("🔥 enter createBooking handler");
         const paymentIntentId = req.body.paymentIntentId;
 
         const paymentIntent = await stripe.paymentIntents.retrieve(
@@ -204,7 +205,8 @@ export const createBooking = catchAsync(
             ...req.body,
             userId: req.userId,
         };
-        console.log(newBooking);
+        // console.log(newBooking);
+        // console.log("req.params.hotelId", req.params.hotelId);
         const hotel = await Hotel.findOneAndUpdate(
             { _id: req.params.hotelId },
             {
@@ -212,7 +214,7 @@ export const createBooking = catchAsync(
             }
         );
 
-        if (!hotel) {
+        if (!hotel || !hotel.toString()) {
             return next(new AppError("hotel not found", 400));
         }
 
