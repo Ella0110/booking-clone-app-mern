@@ -64,7 +64,7 @@ const SearchResultCard = ({ hotel }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-between ">
+                <div className="flex justify-between mt-8">
                     <div className="flex gap-1 items-center">
                         {hotel.facilities.slice(0, 2).map((facility) => (
                             <span className="flex items-center font-semibold px-2 py-1 bg-amber-500 text-white rounded-full text-xs whitespace-nowrap">

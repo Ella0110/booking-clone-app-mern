@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
 import { VscCalendar } from "react-icons/vsc";
@@ -11,10 +11,31 @@ const SearchBar = () => {
     const search = useSearchContext();
     const navigate = useNavigate();
     const [destination, setDestination] = useState<string>(search.destination); // 存储从 context 拿到的数据，默认值用 context 的内容
-    const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
-    const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
     const [adultCount, setAdultCount] = useState<number>(search.adultCount);
     const [childCount, setChildCount] = useState<number>(search.childCount);
+
+    const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
+    // const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
+    const [checkOut, setCheckOut] = useState<Date>(() => {
+        const checkInDate = search.checkIn;
+        const expectedCheckOut = new Date(checkInDate);
+        expectedCheckOut.setDate(expectedCheckOut.getDate() + 1);
+
+        // 如果 search.checkOut 已经比 checkIn + 1 晚，就用它，否则用 checkIn + 1
+        if (search.checkOut > expectedCheckOut) {
+            return search.checkOut;
+        } else {
+            return expectedCheckOut;
+        }
+    });
+
+    useEffect(() => {
+        if (checkOut <= checkIn) {
+            const newCheckOut = new Date(checkIn);
+            newCheckOut.setDate(newCheckOut.getDate() + 1);
+            setCheckOut(newCheckOut);
+        }
+    }, [checkIn, checkOut]);
 
     const handleSubmit = (event: FormEvent) => {
         // 防止 form 自动提交
@@ -33,6 +54,9 @@ const SearchBar = () => {
     const minDate = new Date();
     const maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 1); // 取最近一年的数据
+    const minCheckOutDate = new Date(checkIn);
+    minCheckOutDate.setDate(minCheckOutDate.getDate() + 1);
+    console.log("minCheckOutDate", minCheckOutDate);
     return (
         <form
             onSubmit={handleSubmit}
@@ -105,7 +129,7 @@ const SearchBar = () => {
                     selectsStart
                     startDate={checkIn}
                     endDate={checkOut}
-                    minDate={minDate}
+                    minDate={minCheckOutDate}
                     maxDate={maxDate}
                     placeholderText="Check-in Date"
                     className="flex items-center mt-0.5 w-4/5 bg-white p-2 rounded focus:outline-none"
