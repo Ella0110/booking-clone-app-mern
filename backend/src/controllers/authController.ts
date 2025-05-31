@@ -94,6 +94,7 @@ export const signin = catchAsync(
 
 export const validateToken = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
+        // console.log("🛡️ validateToken triggered");
         res.status(200).send({ userId: req.userId });
     }
 );

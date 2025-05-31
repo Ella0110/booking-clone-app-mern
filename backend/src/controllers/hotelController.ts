@@ -96,8 +96,6 @@ export const getAllHotels = catchAsync(
         if (!hotelsList.toString()) {
             next(new AppError("Failed to find hotel!", 404));
         }
-        console.log(!hotelsList.toString());
-        console.log(hotelsList);
         const totalItems = await Hotel.countDocuments(query); // 酒店总量
         const response: HotelSearchResponse = {
             data: hotelsList,
@@ -127,6 +125,7 @@ export const getHotelById = catchAsync(
 
 export const createPaymentIntent = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
+        console.log("🔥 enter createPaymentIntent handler");
         const { numberOfNights } = req.body;
         const hotelId = req.params.hotelId;
 
@@ -135,8 +134,9 @@ export const createPaymentIntent = catchAsync(
         if (!hotel) {
             return next(new AppError("Can not find hotel by this id.", 404));
         }
-        const totalCost = hotel.pricePerNight * numberOfNights;
 
+        const totalCost = hotel.pricePerNight * numberOfNights * 100;
+        // console.log(totalCost);
         // 发给 Stripe
         const paymentIntent = await stripe.paymentIntents.create({
             amount: totalCost, // 总金额

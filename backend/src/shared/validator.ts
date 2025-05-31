@@ -38,7 +38,7 @@ export const getHotelByIdValidate = [
 export const validate = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);
-        console.log(errors);
+        // console.log(errors);
         if (!errors.isEmpty()) {
             // Group errors by field name
             const validationErrors: ValidationResultError = {};
