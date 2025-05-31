@@ -145,12 +145,12 @@ export const createPaymentIntent = catchAsync(
             return next(new AppError("Can not find hotel by this id.", 404));
         }
 
-        const totalCost = hotel.pricePerNight * numberOfNights * 100;
+        const totalCost = hotel.pricePerNight * numberOfNights;
         // console.log(totalCost);
         // 发给 Stripe
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: totalCost, // 总金额
-            currency: "cny", // 货币
+            amount: totalCost * 100, // 总金额
+            currency: "gbp", // 货币
             metadata: {
                 hotelId,
                 userId: req.userId,
@@ -204,7 +204,7 @@ export const createBooking = catchAsync(
             ...req.body,
             userId: req.userId,
         };
-
+        console.log(newBooking);
         const hotel = await Hotel.findOneAndUpdate(
             { _id: req.params.hotelId },
             {
