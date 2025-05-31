@@ -6,13 +6,18 @@ import {
     createBooking,
 } from "../controllers/hotelController";
 import { getHotelByIdValidate, validate } from "../shared/validator";
-import { validateToken } from "../controllers/authController";
+import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 
 router.get("/search", getAllHotels);
 router.get("/:id", getHotelByIdValidate, validate, getHotelById);
-router.post("/payment-intent", validateToken, createPaymentIntent);
-router.post("/:hotelId/bookings", validateToken, createBooking);
+
+router.post(
+    "/:hotelId/bookings/payment-intent",
+    verifyToken,
+    createPaymentIntent
+);
+router.post("/:hotelId/bookings", verifyToken, createBooking);
 
 export default router;
