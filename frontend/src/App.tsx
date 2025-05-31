@@ -15,6 +15,7 @@ import LayoutComm from "./layout/LayoutComm";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
 import Home from "./pages/Home";
+import MyBookings from "./pages/MyBookings";
 
 const App = () => {
     const { isLoggedIn } = useAppContext();
@@ -86,6 +87,14 @@ const App = () => {
                             element={
                                 <LayoutComm>
                                     <MyHotels />
+                                </LayoutComm>
+                            }
+                        />
+                        <Route
+                            path="/my-bookings"
+                            element={
+                                <LayoutComm>
+                                    <MyBookings />
                                 </LayoutComm>
                             }
                         />
