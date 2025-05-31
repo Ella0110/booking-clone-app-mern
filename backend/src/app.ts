@@ -6,6 +6,7 @@ import globalErrorHandler from "./controllers/errorController";
 import cookieParser from "cookie-parser";
 import myHotelRoute from "./routes/myHotelRoute";
 import hotelRoute from "./routes/hotelRoute";
+import myBookingRoute from "./routes/myBookingRoute";
 
 const app = express();
 app.use(cookieParser());
@@ -26,6 +27,7 @@ app.use(
 app.use("/api/user", userRoute);
 app.use("/api/hotels", hotelRoute);
 app.use("/api/my-hotels", myHotelRoute);
+app.use("/api/my-bookings", myBookingRoute);
 
 app.use(globalErrorHandler);
 
