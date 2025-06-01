@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
+import MyBookingDetailCard from "../components/MyBookingDetailCard";
 
 const MyBookings = () => {
     const { data: hotels } = useQuery(
@@ -33,41 +34,7 @@ const MyBookings = () => {
                                     {hotel.city}, {hotel.country}
                                 </div>
                             </div>
-                            {hotel.bookings.map((booking) => (
-                                <div
-                                    className="flex flex-col lg:flex-row justify-between items-start 
-                                 py-1 "
-                                >
-                                    <div>
-                                        <div>
-                                            <span className="font-bold mr-2">
-                                                Dates:{" "}
-                                            </span>
-                                            <span className="text-[15px]">
-                                                {new Date(
-                                                    booking.checkIn
-                                                ).toDateString()}{" "}
-                                                -
-                                                {new Date(
-                                                    booking.checkOut
-                                                ).toDateString()}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span className="font-bold mr-2">
-                                                Guests:
-                                            </span>
-                                            <span className="text-[15px]">
-                                                {booking.adultCount} adults,{" "}
-                                                {booking.childCount} children
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="text-xl text-slate-800 font-bold">
-                                        £{booking.totalCost}
-                                    </div>
-                                </div>
-                            ))}
+                            <MyBookingDetailCard hotel={hotel} />
                         </div>
                     </div>
                 ))}
