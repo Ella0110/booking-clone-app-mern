@@ -38,112 +38,117 @@ const Register = () => {
         mutation.mutate(data);
     });
     return (
-        <form
-            className="flex flex-col gap-5 container w-3/5 lg:w-2/5 pt-20"
-            onSubmit={onSubmit}
-        >
-            <h2 className="text-4xl font-extrabold">Create an Account</h2>
-            <div className="flex flex-col md:flex-row  gap-5">
+        <div className="container w-3/5 lg:w-2/5 pt-20">
+            <form
+                className="flex flex-col gap-5 p-8 rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_10px_rgba(0,0,0,0.4)]"
+                onSubmit={onSubmit}
+            >
+                <h2 className="text-3xl font-extrabold pb-2">
+                    Create an Account
+                </h2>
+                <div className="flex flex-col md:flex-row  gap-5">
+                    <label className="text-gray-700 text-sm font-bold flex-1">
+                        First Name
+                        <input
+                            className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
+                            {...register("firstname", {
+                                required: "This field is required",
+                            })}
+                        ></input>
+                        {/* 点击 submit 后如果有报错会显示在表单 */}
+                        {errors.firstname && (
+                            <span className="text-red-500 font-normal">
+                                {errors.firstname.message}
+                            </span>
+                        )}
+                    </label>
+                    <label className="text-gray-700 text-sm font-bold flex-1">
+                        Last Name
+                        <input
+                            className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
+                            {...register("lastname", {
+                                required: "This field is required",
+                            })}
+                        ></input>
+                        {errors.lastname && (
+                            <span className="text-red-500 font-normal">
+                                {errors.lastname.message}
+                            </span>
+                        )}
+                    </label>
+                </div>
                 <label className="text-gray-700 text-sm font-bold flex-1">
-                    First Name
+                    Email
                     <input
-                        className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
-                        {...register("firstname", {
+                        type="email"
+                        className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
+                        {...register("email", {
                             required: "This field is required",
                         })}
                     ></input>
-                    {/* 点击 submit 后如果有报错会显示在表单 */}
-                    {errors.firstname && (
+                    {errors.email && (
                         <span className="text-red-500 font-normal">
-                            {errors.firstname.message}
+                            {errors.email.message}
                         </span>
                     )}
                 </label>
                 <label className="text-gray-700 text-sm font-bold flex-1">
-                    Last Name
+                    Password
                     <input
-                        className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
-                        {...register("lastname", {
+                        type="password"
+                        className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
+                        {...register("password", {
                             required: "This field is required",
+                            minLength: {
+                                value: 8, // 密码最短长度
+                                message:
+                                    "Password must be at least 8 characters.", // 返回信息
+                            },
                         })}
                     ></input>
-                    {errors.lastname && (
+                    {errors.password && (
                         <span className="text-red-500 font-normal">
-                            {errors.lastname.message}
+                            {errors.password.message}
                         </span>
                     )}
                 </label>
-            </div>
-            <label className="text-gray-700 text-sm font-bold flex-1">
-                Email
-                <input
-                    type="email"
-                    className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
-                    {...register("email", {
-                        required: "This field is required",
-                    })}
-                ></input>
-                {errors.email && (
-                    <span className="text-red-500 font-normal">
-                        {errors.email.message}
+                <label className="text-gray-700 text-sm font-bold flex-1">
+                    ConfirmPassword
+                    <input
+                        type="password"
+                        className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
+                        {...register("confirmPassword", {
+                            validate: (val) => {
+                                if (!val) {
+                                    return "This field is required";
+                                    // 使用 watch 来获取 password form 中的数据，进行对比
+                                } else if (watch("password") != val) {
+                                    return "Your password do not match";
+                                }
+                            },
+                        })}
+                    ></input>
+                    {errors.confirmPassword && (
+                        <span className="text-red-500 font-normal">
+                            {errors.confirmPassword.message}
+                        </span>
+                    )}
+                </label>
+                <span className="flex justify-between">
+                    <span className="self-end text-sm">
+                        <Link className="underline" to="/signin">
+                            Change to Login
+                        </Link>
                     </span>
-                )}
-            </label>
-            <label className="text-gray-700 text-sm font-bold flex-1">
-                Password
-                <input
-                    type="password"
-                    className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
-                    {...register("password", {
-                        required: "This field is required",
-                        minLength: {
-                            value: 8, // 密码最短长度
-                            message: "Password must be at least 8 characters.", // 返回信息
-                        },
-                    })}
-                ></input>
-                {errors.password && (
-                    <span className="text-red-500 font-normal">
-                        {errors.password.message}
-                    </span>
-                )}
-            </label>
-            <label className="text-gray-700 text-sm font-bold flex-1">
-                ConfirmPassword
-                <input
-                    type="password"
-                    className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
-                    {...register("confirmPassword", {
-                        validate: (val) => {
-                            if (!val) {
-                                return "This field is required";
-                                // 使用 watch 来获取 password form 中的数据，进行对比
-                            } else if (watch("password") != val) {
-                                return "Your password do not match";
-                            }
-                        },
-                    })}
-                ></input>
-                {errors.confirmPassword && (
-                    <span className="text-red-500 font-normal">
-                        {errors.confirmPassword.message}
-                    </span>
-                )}
-            </label>
-            <span className="flex justify-between">
-                <span className="self-end text-sm">
-                    <Link className="underline" to="/signin">
-                        Change to Login
-                    </Link>
+                    <button
+                        type="submit"
+                        className="bg-bookingtexthover text-white p-2 font-bold hover:bg-bookingblue text-xl rounded-md"
+                    >
+                        Register
+                    </button>
                 </span>
-                <button
-                    type="submit"
-                    className="bg-bookingtexthover text-white p-2 font-bold hover:bg-bookingblue text-xl rounded-md"
-                >
-                    Register
-                </button>
-            </span>
-        </form>
+            </form>
+        </div>
     );
 };
 
