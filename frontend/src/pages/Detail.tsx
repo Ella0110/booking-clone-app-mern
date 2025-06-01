@@ -85,7 +85,7 @@ const Detail = () => {
                         {hotel.facilities.map((facility) => (
                             <div
                                 key={facility}
-                                className="bg-amber-500 px-2 py-1 rounded-full text-sm"
+                                className="bg-bookingyellow text-bookingblue px-2 py-1 rounded-full text-sm"
                             >
                                 {facility}
                             </div>
