@@ -11,6 +11,7 @@ import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
 import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router";
+import { CgCheck } from "react-icons/cg";
 
 type Props = {
     currentUser: UserType;
@@ -91,55 +92,90 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="grid grid-cols-1 gap-5 rounded-lg border border-slate-300 p-5"
+            className="grid grid-cols-1 gap-4"
         >
-            <span className="text-3xl font-bold">Confirm Your Details</span>
-            <div className="grid grid-cols-2 gap-6">
-                <label className="text-gray-700 text-sm font-bold flex-1">
-                    First Name
-                    <input
-                        className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
-                        type="text"
-                        readOnly
-                        disabled
-                        {...register("firstname")}
-                    />
-                </label>
-                <label className="text-gray-700 text-sm font-bold flex-1">
-                    Last Name
-                    <input
-                        className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
-                        type="text"
-                        readOnly
-                        disabled
-                        {...register("lastname")}
-                    />
-                </label>
-                <label className="text-gray-700 text-sm font-bold flex-1">
-                    Email
-                    <input
-                        className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
-                        type="text"
-                        readOnly
-                        disabled
-                        {...register("email")}
-                    />
-                </label>
-            </div>
+            <div className="grid grid-cols-1 gap-5 rounded-lg border border-bookingborder p-5">
+                <span className="text-xl font-bold">Confirm Your Details</span>
+                <div className="grid grid-cols-2 gap-6">
+                    <label className=" text-sm  flex-1">
+                        First name
+                        <input
+                            className="mt-1 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 bg-gray-100 font-normal"
+                            type="text"
+                            readOnly
+                            disabled
+                            {...register("firstname")}
+                        />
+                    </label>
+                    <label className="text-sm  flex-1">
+                        Last name
+                        <input
+                            className="mt-1 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 bg-gray-100 font-normal"
+                            type="text"
+                            readOnly
+                            disabled
+                            {...register("lastname")}
+                        />
+                    </label>
+                    <label className=" text-sm flex-1">
+                        Email address
+                        <input
+                            className="mt-1 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 bg-gray-100 font-normal"
+                            type="text"
+                            readOnly
+                            disabled
+                            {...register("email")}
+                        />
+                        <div className="text-xs text-gray-600 mt-1">
+                            Confirmation email goes to this address
+                        </div>
+                    </label>
+                </div>
 
-            <div className="space-y-2">
-                <h2 className="text-xl font-semibold">Your Price Summary</h2>
+                <div className="space-y-2">
+                    <h2 className="text-lg font-bold">Your Price Summary</h2>
 
-                <div className="bg-blue-200 p-4 rounded-md">
-                    <div className="font-semibold text-lg">
-                        Total Cost: £{paymentIntent.totalCost.toFixed(2)}
+                    <div className="bg-blue-50 px-8 py-4 rounded-md flex flex-col items-end gap-2">
+                        <div className="text-red-700 line-through text-lg">
+                            £{(paymentIntent.totalCost * 1.5).toFixed(2)}{" "}
+                        </div>
+                        <div className="flex justify-between items-center w-full">
+                            <div className="text-3xl font-bold">Price</div>
+                            <div className="text-3xl font-bold ">
+                                £{paymentIntent.totalCost.toFixed(2)}
+                            </div>
+                        </div>
+                        <div className="text-sm text-gray-600">
+                            Includes taxes and charges
+                        </div>
                     </div>
-                    <div className="text-xs">Includes taxes and charges</div>
+                </div>
+            </div>
+            <div className="grid grid-cols-1 gap-1 rounded-lg border border-bookingborder p-5">
+                <h3 className="text-lg font-bold mb-1">Good to know</h3>
+                <div className="flex gap-2 items-center">
+                    <CgCheck
+                        size={16}
+                        className="bg-green-600  text-white rounded-full"
+                    />
+                    <div className="text-sm">
+                        Stay flexible: You can cancel for free before 5 June
+                        2025, so lock in this great price today.
+                    </div>
+                </div>
+                <div className="flex gap-2 items-center">
+                    <CgCheck
+                        size={16}
+                        className="bg-green-600  text-white rounded-full"
+                    />
+                    <div className="text-sm">
+                        You'll get the entire apartment to yourself!
+                    </div>
                 </div>
             </div>
 
-            <div className="space-y-2">
-                <h3 className="text-xl font-semibold"> Payment Details</h3>
+            <div className="rounded-lg border border-bookingborder p-5 space-y-2">
+                <h3 className="text-lg font-bold"> Payment Details</h3>
                 <CardElement
                     id="payment-element"
                     className="border rounded-md p-2 text-sm"
@@ -150,7 +186,8 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
                 <button
                     disabled={isLoading}
                     type="submit"
-                    className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-md disabled:bg-gray-500"
+                    className="bg-bookingbutton rounded-lg text-white px-4 py-2 font-semibold hover:bg-bookingbuttonhover 
+                    text-md disabled:bg-gray-500"
                 >
                     {isLoading ? "Saving..." : "Confirm Booking"}
                 </button>

@@ -1,12 +1,9 @@
-import type { HotelType } from "../../../backend/src/shared/type";
-
 type Props = {
     checkIn: Date;
     checkOut: Date;
     adultCount: number;
     childCount: number;
     numberOfNights: number;
-    hotel: HotelType;
 };
 
 const BookingDetailsSummary = ({
@@ -15,33 +12,35 @@ const BookingDetailsSummary = ({
     adultCount,
     childCount,
     numberOfNights,
-    hotel,
 }: Props) => {
     return (
-        <div className="grid gap-4 rounded-lg border border-slate-300 p-5 h-fit">
-            <h2 className="text-xl font-bold">Your Booking Details</h2>
-            <div className="border-b py-2">
-                Location:
-                <div className="font-bold">{`${hotel.name}, ${hotel.city}, ${hotel.country}`}</div>
-            </div>
+        <div className="grid gap-4 rounded-lg border border-bookingborder p-5 h-fit">
+            <h2 className="text-md font-bold">Your Booking Details</h2>
             <div className="flex justify-between">
-                <div>
+                <div className="text-sm">
                     Check-in
-                    <div className="font-bold"> {checkIn.toDateString()}</div>
+                    <div className="font-bold text-[16px]">
+                        {" "}
+                        {checkIn.toDateString()}
+                    </div>
                 </div>
-                <div>
+                <div className=" w-px bg-gray-300 "></div>
+                <div className="text-sm">
                     Check-out
-                    <div className="font-bold"> {checkOut.toDateString()}</div>
+                    <div className="font-bold text-[16px]">
+                        {" "}
+                        {checkOut.toDateString()}
+                    </div>
                 </div>
             </div>
-            <div className="border-t border-b py-2">
+            <div className="text-sm border-b border-gray-300">
                 Total length of stay:
-                <div className="font-bold">{numberOfNights} nights</div>
+                <div className="font-bold py-2 ">{numberOfNights} nights</div>
             </div>
 
-            <div>
-                Guests{" "}
-                <div className="font-bold">
+            <div className="text-sm">
+                You selected{" "}
+                <div className="font-bold text-[16px] pt-2">
                     {adultCount} adults & {childCount} children
                 </div>
             </div>

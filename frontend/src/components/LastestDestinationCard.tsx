@@ -19,7 +19,7 @@ const LatestDestinationCard = ({ hotel }: Props) => {
             </div>
 
             <div className="absolute bottom-0 p-4  bg-gradient-to-t from-black  w-full rounded-b-md">
-                <span className="text-white font-bold tracking-tight text-3xl">
+                <span className="text-white font-bold tracking-tight text-2xl">
                     {hotel.name}
                 </span>
             </div>

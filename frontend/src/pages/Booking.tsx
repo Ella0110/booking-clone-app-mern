@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import BookingDetailsSummary from "../components/BookingDetailsSummary";
 import { Elements } from "@stripe/react-stripe-js";
 import { useAppContext } from "../contexts/AppContext";
+import BookingProgress from "../components/BookingProgress";
+import HotelDetailSummary from "../components/HotelDetailSummary";
+import ReviewHoursRules from "../components/ReviewHoursRules";
+// import PriceDetailSummary from "../components/PriceDetailSummary";
 
 const Booking = () => {
     const { stripePromise } = useAppContext();
@@ -55,28 +59,38 @@ const Booking = () => {
     }
 
     return (
-        <div className="grid md:grid-cols-[1fr_2fr]">
-            <BookingDetailsSummary
-                checkIn={search.checkIn}
-                checkOut={search.checkOut}
-                adultCount={search.adultCount}
-                childCount={search.childCount}
-                numberOfNights={numberOfNights}
-                hotel={hotel}
-            />
-            {currentUser && paymentIntentData && (
-                <Elements
-                    stripe={stripePromise}
-                    options={{
-                        clientSecret: paymentIntentData.clientSecret,
-                    }}
-                >
-                    <BookingForm
-                        currentUser={currentUser}
-                        paymentIntent={paymentIntentData}
+        <div className="flex flex-col gap-8">
+            <BookingProgress />
+            <div className="grid md:grid-cols-[1fr_2fr] gap-8">
+                <div className="flex flex-col gap-4">
+                    <HotelDetailSummary
+                        adultCount={search.adultCount}
+                        childCount={search.childCount}
+                        hotel={hotel}
                     />
-                </Elements>
-            )}
+                    <BookingDetailsSummary
+                        checkIn={search.checkIn}
+                        checkOut={search.checkOut}
+                        adultCount={search.adultCount}
+                        childCount={search.childCount}
+                        numberOfNights={numberOfNights}
+                    />
+                    <ReviewHoursRules />
+                </div>
+                {currentUser && paymentIntentData && (
+                    <Elements
+                        stripe={stripePromise}
+                        options={{
+                            clientSecret: paymentIntentData.clientSecret,
+                        }}
+                    >
+                        <BookingForm
+                            currentUser={currentUser}
+                            paymentIntent={paymentIntentData}
+                        />
+                    </Elements>
+                )}
+            </div>
         </div>
     );
 };
