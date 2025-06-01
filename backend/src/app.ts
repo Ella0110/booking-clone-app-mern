@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import myHotelRoute from "./routes/myHotelRoute";
 import hotelRoute from "./routes/hotelRoute";
 import myBookingRoute from "./routes/myBookingRoute";
+import path from "path";
 
 const app = express();
 app.use(cookieParser());
@@ -23,6 +24,8 @@ app.use(
         credentials: true,
     })
 );
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 // API
 app.use("/api/user", userRoute);
 app.use("/api/hotels", hotelRoute);
