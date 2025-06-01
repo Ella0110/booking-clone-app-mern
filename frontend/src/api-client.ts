@@ -250,3 +250,19 @@ export const fetchMyBookings = async (): Promise<HotelType[]> => {
 
     return response.json();
 };
+
+export const deleteMyBooking = async (hotelId: string, bookingId: string) => {
+    const response = await fetch(`${API_BASE_URL}/api/my-bookings/${hotelId}`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ bookingId }),
+    });
+    if (!response.ok) {
+        throw new Error("Error deleting booking by hotelId");
+    }
+
+    return response.json();
+};

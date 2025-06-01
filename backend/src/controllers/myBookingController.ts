@@ -33,3 +33,20 @@ export const getMyBookings = catchAsync(
         res.status(200).json(result);
     }
 );
+
+export const deleteMyBooking = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const hotel = await Hotel.findOneAndUpdate(
+            { _id: req.params.hotelId },
+            {
+                $pull: { bookings: { _id: req.body.bookingId } },
+            }
+        );
+
+        if (!hotel || !hotel.toString()) {
+            return next(new AppError("Can not find hotel by hotelId", 404));
+        }
+
+        res.status(204).json({ status: "success" });
+    }
+);
