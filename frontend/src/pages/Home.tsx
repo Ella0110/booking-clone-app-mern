@@ -66,13 +66,13 @@ const Home = () => {
                             </p>
                             <div className="flex">
                                 <Link
-                                    to="/register"
+                                    to="/signin"
                                     className="hidden sm:flex items-center self-center text-white p-2  text-sm font-medium rounded-sm bg-bookingbutton hover:bg-bookingbuttonhover cursor-pointer"
                                 >
                                     Sign In
                                 </Link>
                                 <Link
-                                    to="/signin"
+                                    to="/register"
                                     className="hidden sm:flex  items-center self-center text-bookingtext p-2 ml-2 text-sm font-medium rounded-sm bg-white hover:bg-bookingwhitebghover cursor-pointer"
                                 >
                                     Register
