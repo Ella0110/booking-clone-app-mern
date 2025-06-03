@@ -47,6 +47,10 @@ const SignIn = () => {
                         className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
                         {...register("email", {
                             required: "This field is required",
+                            pattern: {
+                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                message: "Please enter a valid email address.",
+                            },
                         })}
                     ></input>
                     {errors.email && (

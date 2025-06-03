@@ -18,7 +18,7 @@ const Register = () => {
     const { showToast } = useAppContext();
     const {
         register, // 写 validate，验证内容
-        watch, // 查看统一表单其他行的输入内容
+        watch, // 查看同一表单其他行的输入内容
         handleSubmit, // 提交时验证表单
         formState: { errors }, // 展示报错到表单
     } = useForm<RegisterFormData>();
@@ -53,6 +53,11 @@ const Register = () => {
                             className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
                             {...register("firstname", {
                                 required: "This field is required",
+                                pattern: {
+                                    value: /^[A-Za-z][A-Za-z0-9]*$/,
+                                    message:
+                                        "Must start with a letter and contain only letters and numbers.",
+                                },
                             })}
                         ></input>
                         {/* 点击 submit 后如果有报错会显示在表单 */}
@@ -68,6 +73,11 @@ const Register = () => {
                             className="border border-gray-300 rounded w-full py-1 px-2 font-normal"
                             {...register("lastname", {
                                 required: "This field is required",
+                                pattern: {
+                                    value: /^[A-Za-z][A-Za-z0-9]*$/,
+                                    message:
+                                        "Must start with a letter and contain only letters and numbers.",
+                                },
                             })}
                         ></input>
                         {errors.lastname && (
@@ -84,6 +94,10 @@ const Register = () => {
                         className="border border-gray-300 rounded w-full py-1 px-2 font-normal flex-1"
                         {...register("email", {
                             required: "This field is required",
+                            pattern: {
+                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                message: "Please enter a valid email address.",
+                            },
                         })}
                     ></input>
                     {errors.email && (
