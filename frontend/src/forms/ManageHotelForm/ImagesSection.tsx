@@ -71,8 +71,8 @@ const ImagesSection = () => {
                                     imageFiles?.length +
                                     (existingImageUrls?.length || 0);
 
-                                if (totalLength === 0) {
-                                    return "At least one image should be added.";
+                                if (totalLength < 3) {
+                                    return "At least 3 image should be added.";
                                 }
 
                                 if (totalLength > 6) {
