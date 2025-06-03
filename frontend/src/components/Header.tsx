@@ -9,7 +9,7 @@ const Header = () => {
         <div className="bg-bookingblue py-6">
             <div className="container mx-auto flex justify-between">
                 <span className="text-2xl text-white font-bold tracking-tight">
-                    <Link to="/">BookingClone.com</Link>
+                    <Link to="/">BookHub.com</Link>
                 </span>
                 <span className="flex space-x-2">
                     <Link
