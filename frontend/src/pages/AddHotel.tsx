@@ -1,14 +1,17 @@
 import { useMutation } from "react-query";
 import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 import * as apiClient from "../api-client";
+import { useNavigate } from "react-router";
 import { useAppContext } from "../contexts/AppContext";
 
 const AddHotel = () => {
+    const navigate = useNavigate();
     const { showToast } = useAppContext();
 
     const { mutate, isLoading } = useMutation(apiClient.addMyHotel, {
-        onSuccess: () => {
+        onSuccess: async () => {
             showToast({ message: "Hotel Saved!", type: "SUCCESS" });
+            navigate("/my-hotels");
         },
         onError: () => {
             showToast({ message: "Error Saving Hotel", type: "ERROR" });

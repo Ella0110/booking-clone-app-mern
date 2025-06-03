@@ -6,7 +6,6 @@ import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
 import type { HotelType } from "../../../../backend/src/shared/type";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 
 export type HotelFormData = {
     name: string;
@@ -31,7 +30,6 @@ type Props = {
 const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     const formMethods = useForm<HotelFormData>();
     const { handleSubmit, reset } = formMethods;
-    const navigate = useNavigate();
 
     useEffect(() => {
         // 当 hotel 数据变了就 reset 页面
@@ -71,7 +69,6 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
         }
 
         onSave(formData);
-        navigate("/my-hotels");
     });
     return (
         <FormProvider {...formMethods}>
