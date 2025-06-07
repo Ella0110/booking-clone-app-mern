@@ -14,7 +14,7 @@ export const hotelValidate = [
     body("type").notEmpty().withMessage("Hotel type is required"),
     body("pricePerNight")
         .notEmpty()
-        .isNumeric() // 确保他是数字
+        .isNumeric() // 确保它是数字
         .withMessage("Price per night is required and must be a number"),
     body("facilities")
         .notEmpty()
