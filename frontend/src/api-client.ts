@@ -1,8 +1,6 @@
 /**
  * 连接后端，获取 api
- * - `formData`：从表格中获取用户输入内容
  * - `response`：后端 API 返回数据
- * - `isOperational`：标记是否可预期，便于全局错误处理中区分
  */
 
 import type { RegisterFormData } from "./pages/Register";
