@@ -33,7 +33,7 @@ const App = () => {
                 <Route
                     path="/detail/:hotelId"
                     element={
-                        <LayoutSearch>
+                        <LayoutSearch showSearchBar={false}>
                             <Detail />
                         </LayoutSearch>
                     }
