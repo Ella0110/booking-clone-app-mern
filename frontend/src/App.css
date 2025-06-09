@@ -17,9 +17,13 @@
     padding-inline: 20px;
     margin-inline: auto;
 
-    @variant sm {
+    /* @variant sm {
         padding-inline: 40px;
-    }
+    } */
+
+    /* @variant md {
+        padding-inline: 40px;
+    } */
 
     @variant lg {
         padding-inline: 80px;
