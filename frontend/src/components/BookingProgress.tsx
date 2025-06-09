@@ -2,7 +2,7 @@ import { CgCheck } from "react-icons/cg";
 
 const BookingProgress = () => {
     return (
-        <div className="flex justify-between items-center">
+        <div className="hidden md:flex justify-between items-center">
             <div className="flex items-cemter gap-2 justify-center">
                 <CgCheck
                     size={24}
