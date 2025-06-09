@@ -43,7 +43,7 @@ const Detail = () => {
                     </div>
                     <h1 className="text-3xl font-bold">{hotel.name}</h1>
                 </div>
-                <div className="bg-bookingbutton hover:bg-bookingbuttonhover text-white px-3 py-1 rounded">
+                <div className="hidden md:block bg-bookingbutton hover:bg-bookingbuttonhover text-white px-3 py-1 rounded">
                     Reserve
                 </div>
             </div>
@@ -81,7 +81,7 @@ const Detail = () => {
                     <h2 className="text-lg font-bold">
                         Most popular facilities
                     </h2>
-                    <div className="flex gap-6">
+                    <div className="flex flex-wrap gap-6">
                         {hotel.facilities.map((facility) => (
                             <div
                                 key={facility}
