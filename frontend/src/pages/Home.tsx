@@ -67,19 +67,19 @@ const Home = () => {
                             <div className="flex">
                                 <Link
                                     to="/signin"
-                                    className="hidden sm:flex items-center self-center text-white p-2  text-sm font-medium rounded-sm bg-bookingbutton hover:bg-bookingbuttonhover cursor-pointer"
+                                    className="flex items-center self-center text-white p-2  text-sm font-medium rounded-sm bg-bookingbutton hover:bg-bookingbuttonhover cursor-pointer"
                                 >
                                     Sign In
                                 </Link>
                                 <Link
                                     to="/register"
-                                    className="hidden sm:flex  items-center self-center text-bookingtext p-2 ml-2 text-sm font-medium rounded-sm bg-white hover:bg-bookingwhitebghover cursor-pointer"
+                                    className="flex  items-center self-center text-bookingtext p-2 ml-2 text-sm font-medium rounded-sm bg-white hover:bg-bookingwhitebghover cursor-pointer"
                                 >
                                     Register
                                 </Link>
                             </div>
                         </div>
-                        <div>
+                        <div className="w-[200px] ">
                             <img
                                 className="h-[100px]"
                                 src="/GeniusGenericGiftBox@2x.png"

@@ -155,20 +155,18 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             </div>
             <div className="grid grid-cols-1 gap-1 rounded-lg border border-bookingborder p-5">
                 <h3 className="text-lg font-bold mb-1">Good to know</h3>
-                <div className="flex gap-2 items-center">
+                <div className="grid grid-cols-[1fr_9fr] md:grid-cols-[1fr_15fr] xl:grid-cols-[1fr_30fr]  items-center">
                     <CgCheck
                         size={16}
-                        className="bg-green-600  text-white rounded-full"
+                        className="bg-green-600  w-4 text-white rounded-full"
                     />
                     <div className="text-sm">
                         Stay flexible: You can cancel for free before 5 June
                         2025, so lock in this great price today.
                     </div>
-                </div>
-                <div className="flex gap-2 items-center">
                     <CgCheck
                         size={16}
-                        className="bg-green-600  text-white rounded-full"
+                        className="bg-green-600 w-4 text-white rounded-full"
                     />
                     <div className="text-sm">
                         You'll get the entire apartment to yourself!
