@@ -38,7 +38,14 @@ const Register = () => {
         mutation.mutate(data);
     });
     return (
-        <div className="container w-3/5 lg:w-2/5 pt-20">
+        <div
+            className="w-[90%]   /* 手机 90% 宽度 */
+                md:w-3/5   /* ≥768px 时 60% */
+                lg:w-2/5   /* ≥1024px 时 40% */
+                xl:w-96
+                mx-auto    /* 水平居中 */
+                pt-20"
+        >
             <form
                 className="flex flex-col gap-5 p-8 rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_10px_rgba(0,0,0,0.4)]"
                 onSubmit={onSubmit}
