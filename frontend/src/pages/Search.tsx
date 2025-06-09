@@ -73,7 +73,7 @@ const Search = () => {
     // grid-cols-[250px_1fr] 表示分为两个 grid，左边 250px，右边是剩下的长度
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-            <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
+            <div className="hidden lg:block rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
                 <div className="space-y-3">
                     <h3 className="text-lg font-semibold border-b border-slate-300 pb-1">
                         Filter by:
