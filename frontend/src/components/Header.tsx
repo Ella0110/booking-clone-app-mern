@@ -2,6 +2,9 @@ import { Link } from "react-router";
 import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "./SignOutButton";
 import { GrSearch } from "react-icons/gr";
+// import { VscAccount } from "react-icons/vsc";
+import { FiMenu } from "react-icons/fi";
+import { RiAccountCircleFill, RiAccountCircleLine } from "react-icons/ri";
 
 const Header = () => {
     const { isLoggedIn } = useAppContext();
@@ -18,15 +21,16 @@ const Header = () => {
                     >
                         <GrSearch size={20} className=" text-white  " />
                     </Link>
+
                     <Link
                         to="/currency"
-                        className="flex items-center text-white px-3 text-base font-bold rounded-full hover:bg-bookingtexthover cursor-pointer"
+                        className="hidden sm:flex items-center text-white px-3 text-base font-bold rounded-full hover:bg-bookingtexthover cursor-pointer"
                     >
                         NZD
                     </Link>
                     <Link
                         to="/translate"
-                        className="flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
+                        className="hidden sm:flex items-center px-3 py-1  text-white text-sm font-medium rounded-full hover:bg-bookingtexthover cursor-pointer"
                     >
                         文/A
                     </Link>
@@ -45,6 +49,15 @@ const Header = () => {
                                 My Hotel
                             </Link>
                             <SignOutButton />
+                            <Link
+                                to="/"
+                                className="sm:hidden flex items-center rounded-full hover:bg-bookingtexthover cursor-pointer px-2 py-1"
+                            >
+                                <RiAccountCircleFill
+                                    size={20}
+                                    className="text-white"
+                                />
+                            </Link>
                         </>
                     ) : (
                         <>
@@ -60,8 +73,23 @@ const Header = () => {
                             >
                                 Sign In
                             </Link>
+                            <Link
+                                to="/signin"
+                                className="sm:hidden flex items-center rounded-full hover:bg-bookingtexthover cursor-pointer px-2 py-1"
+                            >
+                                <RiAccountCircleLine
+                                    size={20}
+                                    className="text-white"
+                                />
+                            </Link>
                         </>
                     )}
+                    <Link
+                        to="/"
+                        className="sm:hidden flex items-center rounded-full hover:bg-bookingtexthover cursor-pointer px-2 py-1"
+                    >
+                        <FiMenu size={20} className="text-white" />
+                    </Link>
                 </span>
             </div>
         </div>
