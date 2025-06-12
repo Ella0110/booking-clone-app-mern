@@ -3,11 +3,13 @@ import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "./SignOutButton";
 import { GrSearch } from "react-icons/gr";
 // import { VscAccount } from "react-icons/vsc";
-import { FiMenu } from "react-icons/fi";
-import { RiAccountCircleFill, RiAccountCircleLine } from "react-icons/ri";
+import { RiAccountCircleLine } from "react-icons/ri";
+import Menu from "./Menu";
+import AccountMenu from "./AccountMenu";
 
 const Header = () => {
     const { isLoggedIn } = useAppContext();
+
     return (
         <div className="bg-bookingblue py-6">
             <div className="container mx-auto flex justify-between">
@@ -49,15 +51,7 @@ const Header = () => {
                                 My Hotel
                             </Link>
                             <SignOutButton />
-                            <Link
-                                to="/"
-                                className="sm:hidden flex items-center rounded-full hover:bg-bookingtexthover cursor-pointer px-2 py-1"
-                            >
-                                <RiAccountCircleFill
-                                    size={20}
-                                    className="text-white"
-                                />
-                            </Link>
+                            <AccountMenu />
                         </>
                     ) : (
                         <>
@@ -84,12 +78,7 @@ const Header = () => {
                             </Link>
                         </>
                     )}
-                    <Link
-                        to="/"
-                        className="sm:hidden flex items-center rounded-full hover:bg-bookingtexthover cursor-pointer px-2 py-1"
-                    >
-                        <FiMenu size={20} className="text-white" />
-                    </Link>
+                    <Menu />
                 </span>
             </div>
         </div>
