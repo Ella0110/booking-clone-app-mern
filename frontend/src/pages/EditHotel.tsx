@@ -28,7 +28,7 @@ const EditHotel = () => {
         mutate(hotelFormData);
     };
     return (
-        <div className="mx-40">
+        <div className="mx-1 sm:mx-10 md:mx-20 xl:mx-40">
             <ManageHotelForm
                 hotel={hotel}
                 onSave={handleSave}

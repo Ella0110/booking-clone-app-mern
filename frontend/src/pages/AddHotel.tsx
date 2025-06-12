@@ -24,7 +24,7 @@ const AddHotel = () => {
 
     // isLoading 的作用：当用户点击 save 提交表单时，让 save 按钮不能使用
     return (
-        <div className="mx-40">
+        <div className="mx-1 sm:mx-10 md:mx-20 xl:mx-40">
             <ManageHotelForm onSave={handleSave} isLoading={isLoading} />
         </div>
     );
