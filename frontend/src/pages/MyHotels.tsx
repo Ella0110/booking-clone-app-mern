@@ -45,7 +45,7 @@ const MyHotels = () => {
                             <h3 className="text-xl font-bold">
                                 Most popular facilities
                             </h3>
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 flex-wrap">
                                 <div className=" rounded-sm p-3 flex items-center text-slate-800 text-sm">
                                     <BsMap className="mr-1  text-blue-600" />
                                     {hotel.city}, {hotel.country}
