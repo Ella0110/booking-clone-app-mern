@@ -39,7 +39,9 @@ const MyHotels = () => {
                         <div className="whitespace-pre-line">
                             {" "}
                             {/*防止 overflow*/}
-                            {hotel.description}
+                            {hotel.description.length > 200
+                                ? hotel.description.slice(0, 200) + "..."
+                                : hotel.description}
                         </div>
                         <div>
                             <h3 className="text-xl font-bold">
