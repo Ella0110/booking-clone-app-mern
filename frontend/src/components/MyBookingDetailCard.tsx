@@ -10,10 +10,10 @@ const MyBookingDetailCard = ({ hotel }: Props) => {
         <>
             {hotel.bookings.map((booking) => (
                 <div
-                    className="flex flex-col lg:flex-row justify-between items-start 
+                    className="flex flex-col lg:flex-row justify-between items-start
              py-1 "
                 >
-                    <div>
+                    <div className="pb-2 md:pb-0">
                         <div>
                             <span className="font-bold mr-2">Dates: </span>
                             <span className="text-[15px]">
@@ -30,7 +30,7 @@ const MyBookingDetailCard = ({ hotel }: Props) => {
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
-                        <div className="text-xl text-slate-800 font-bold">
+                        <div className="text-2xl lg:text-xl text-slate-800 font-bold">
                             £{booking.totalCost}
                         </div>
                         <IoMdMore

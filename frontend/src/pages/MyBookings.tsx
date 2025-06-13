@@ -21,7 +21,7 @@ const MyBookings = () => {
                         className="flex flex-col lg:flex-row items-center border border-bookingformbackground rounded-lg 
                     shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_10px_rgba(0,0,0,0.4)] p-8 gap-8"
                     >
-                        <div className="lg:w-[150px] lg:h-[150px]">
+                        <div className="w-[300px] h-[200px] lg:w-[150px] lg:h-[150px]">
                             <img
                                 src={hotel.imageUrls[0]}
                                 className="w-full h-full object-cover rounded-lg object-center"
