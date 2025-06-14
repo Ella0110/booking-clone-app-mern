@@ -33,7 +33,8 @@ const MyHotels = () => {
                 {hotelData.map((hotel) => (
                     <div
                         key={hotel._id}
-                        className="flex flex-col justify-between border border-slate-300 rounded p-8 gap-5"
+                        className="flex flex-col justify-between  border border-bookingformbackground rounded-lg 
+                    shadow-[0_0_10px_rgba(0,0,0,0.2)] hover:shadow-[0_0_10px_rgba(0,0,0,0.4)] p-8 gap-5"
                     >
                         <h2 className="text-2xl font-bold">{hotel.name}</h2>
                         <div className="whitespace-pre-line">
