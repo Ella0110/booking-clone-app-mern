@@ -63,7 +63,7 @@ const SearchBar = () => {
             className="-mt-6 p-1 bg-orange-300 rounded shadow-md  flex flex-col md:flex-row item-center gap-1"
         >
             <div className="flex flex-row w-full md:w-1/4 items-center flex-1 rounded bg-white p-2">
-                <MdTravelExplore size={25} className="text-gray-700 mr-2" />
+                <MdTravelExplore size={25} className="text-gray-700 mr-4" />
                 <input
                     placeholder="Where are you going?"
                     className="text-md w-full focus:outline-hidden"
@@ -72,7 +72,7 @@ const SearchBar = () => {
                 />
             </div>
             <div className="flex items-center  w-full md:w-1/4 bg-white px-2 rounded">
-                <VscAccount size={25} className="text-gray-700 mr-2" />
+                <VscAccount size={25} className="text-gray-700 mr-4" />
                 <label className="flex item-center ">
                     <div className="flex items-center">Adults: </div>
                     <input
