@@ -1,11 +1,10 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
-import { VscCalendar } from "react-icons/vsc";
-import { VscAccount } from "react-icons/vsc";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // 因为 DatePicker 没有样式，所以我们吟咏这个样式
 import { useNavigate } from "react-router";
+import { LuCalendarDays, LuUserRound } from "react-icons/lu";
 
 const SearchBar = () => {
     const search = useSearchContext();
@@ -72,7 +71,7 @@ const SearchBar = () => {
                 />
             </div>
             <div className="flex items-center  w-full md:w-1/4 bg-white px-2 rounded">
-                <VscAccount size={25} className="text-gray-700 mr-4" />
+                <LuUserRound size={25} className="text-gray-700 mr-4" />
                 <label className="flex item-center ">
                     <div className="flex items-center">Adults: </div>
                     <input
@@ -101,7 +100,7 @@ const SearchBar = () => {
                 </label>
             </div>
             <div className="flex flex-row w-full md:w-1/5 items-center  bg-white px-2 rounded">
-                <VscCalendar
+                <LuCalendarDays
                     size={25}
                     className="text-gray-700 mr-2 shrink-0"
                 />
@@ -119,7 +118,7 @@ const SearchBar = () => {
                 />
             </div>
             <div className="flex flex-row w-full md:w-1/5 items-center  bg-white px-2 rounded ">
-                <VscCalendar
+                <LuCalendarDays
                     size={25}
                     className="text-gray-700 mr-2 shrink-0"
                 />
