@@ -27,7 +27,7 @@ const MyBookings = () => {
                                 className="w-full h-full object-cover rounded-lg object-center"
                             />
                         </div>
-                        <div className="flex grow flex-col gap-4 overflow-y-auto max-h-[300px]">
+                        <div className="flex grow flex-col gap-4  max-h-[300px]">
                             <div className="text-xl font-bold">
                                 {hotel.name}
                                 <div className="text-sm font-normal">
