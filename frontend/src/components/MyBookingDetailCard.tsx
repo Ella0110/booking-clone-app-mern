@@ -1,17 +1,35 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { HotelType } from "../../../backend/src/shared/type";
 import { IoMdMore } from "react-icons/io";
+import { deleteMyBooking } from "../api-client";
 
 type Props = {
     hotel: HotelType;
 };
 
 const MyBookingDetailCard = ({ hotel }: Props) => {
+    const [bookings, setBookings] = useState(hotel.bookings);
     const [openBookingId, setOpenBookingId] = useState<string | null>(null);
     const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setBookings(hotel.bookings);
+    }, [hotel.bookings]);
+
+    const handleDelete = async (bookingId: string) => {
+        try {
+            await deleteMyBooking(hotel._id, bookingId);
+            setBookings((prev) => prev.filter((b) => b._id !== bookingId));
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setOpenBookingId(null);
+        }
+    };
+
     return (
         <>
-            {hotel.bookings.map((booking) => (
+            {bookings.map((booking) => (
                 <div
                     key={booking._id}
                     className="flex flex-col lg:flex-row justify-between items-start
@@ -57,7 +75,9 @@ const MyBookingDetailCard = ({ hotel }: Props) => {
                                 <div className="absolute -top-1 left-8 md:-left-16 md:top-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg overflow-hidden z-10">
                                     <button
                                         className=" px-2 py-1/2 w-full flex items-center justify-center active:bg-gray-100 focus:bg-gray-100 "
-                                        onClick={() => setOpenBookingId(null)}
+                                        onClick={() =>
+                                            handleDelete(booking._id)
+                                        }
                                     >
                                         Delete
                                     </button>
