@@ -262,5 +262,5 @@ export const deleteMyBooking = async (hotelId: string, bookingId: string) => {
         throw new Error("Error deleting booking by hotelId");
     }
 
-    return response.json();
+    return;
 };
