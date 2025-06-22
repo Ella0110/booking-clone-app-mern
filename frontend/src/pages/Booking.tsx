@@ -10,7 +10,6 @@ import { useAppContext } from "../contexts/AppContext";
 import BookingProgress from "../components/BookingProgress";
 import HotelDetailSummary from "../components/HotelDetailSummary";
 import ReviewHoursRules from "../components/ReviewHoursRules";
-// import PriceDetailSummary from "../components/PriceDetailSummary";
 
 const Booking = () => {
     const { stripePromise } = useAppContext();
