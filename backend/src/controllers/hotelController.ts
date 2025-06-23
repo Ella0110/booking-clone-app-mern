@@ -146,7 +146,6 @@ export const createPaymentIntent = catchAsync(
         }
 
         const totalCost = hotel.pricePerNight * numberOfNights;
-        // console.log(totalCost);
         // 发给 Stripe
         const paymentIntent = await stripe.paymentIntents.create({
             amount: totalCost * 100, // 总金额
