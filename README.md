@@ -25,6 +25,7 @@ booking-clone-app-mern/
 ├── frontend/ # React client (src/, components, pages)
 ├── e2e-tests/ # Playwright end-to-end tests
 └── .gitignore
+```
 
 ## Installation
 
