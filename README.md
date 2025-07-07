@@ -19,6 +19,7 @@ A full-stack MERN booking clone application built with TypeScript, featuring use
 - **Testing**: Playwright for E2E (`@playwright/test`)  
 
 ## Project Structure
+```bash
 booking-clone-app-mern/
 ├── backend/ # Express API (src/, controllers, models, routes)
 ├── frontend/ # React client (src/, components, pages)
