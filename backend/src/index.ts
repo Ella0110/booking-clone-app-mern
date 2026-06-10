@@ -11,16 +11,20 @@ cloudinary.config({
 
 const DB = (process.env.MONGO_CONNECTION_STRING as string).replace(
     "<PASSWORD>",
-    process.env.DATABASE_PASSWORD as string
+    process.env.DATABASE_PASSWORD as string,
 );
 mongoose.connect(DB).then(() => {
     console.log(
         "DB connection successful: ",
-        process.env.MONGO_CONNECTION_STRING
+        process.env.MONGO_CONNECTION_STRING,
     );
 });
 
 const PORT = process.env.PORT || 3001;
+
+app.get("/healthz", (req, res) => {
+    res.status(200).send("ok");
+});
 
 app.listen(PORT, () => {
     console.log(`server running on localhost: ${PORT}`);
